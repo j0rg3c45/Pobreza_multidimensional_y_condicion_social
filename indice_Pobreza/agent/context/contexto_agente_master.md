@@ -243,3 +243,71 @@ Este repo ya tiene una metodologia definida y parcialmente consolidada. `Barrio 
 Puedes iniciar a otro agente con este texto:
 
 > Este repo calcula el ITT de zonas urbanas de Cali. La metodologia vigente exige `ref_min/ref_max` fijos por indicador y esta documentada en `agent/knowledge_base/Guia_ITT_Metodologia_Notebook.md`. `notebooks/03_itt_barrio_obrero.ipynb` es la referencia operativa principal; `notebooks/01_itt_roosevelt.ipynb` ya esta alineado a esa logica; `notebooks/02_itt_avenida_ciudad_de_cali.ipynb` sigue funcional pero aun usa min-max relativo y debe tratarse como implementacion pendiente de homologacion. Los valores Proxy actuales provenientes de Pulmon de Oriente son `Entorno Urbano = 39.2`, `Educacion y Desarrollo = 54.9` y `Vulnerabilidad = 54.1`, pero en Barrio Obrero `Entorno Urbano` ya puede sobrescribirse con un proxy experimental de `deficit habitacional 2024` para `Comuna 9`. Ese proxy no tiene periodicidad mensual o trimestral observada; su visualizacion adecuada hoy es el `heatmap` de componentes del deficit cualitativo 2024. Distingue siempre entre datos reales, scores provisionales y metodologia vigente. No inventes outputs no versionados ni asumas que el comparativo ya esta completo.
+
+## 13. Escala de clasificacion del ICS (Indice de Condicion Social)
+
+El ICS se clasifica en 8 categorias con la siguiente escala de colores y rangos numericos (usar coma como separador decimal):
+
+| HEX | Rango | Categoria |
+| :--- | :--- | :--- |
+| `#FFFF99` | 0,4 - 20,0 | Bajo |
+| `#B2FF66` | 20,1 - 27,0 | Moderado-Bajo |
+| `#66FF33` | 27,1 - 33,1 | Moderado |
+| `#4CD164` | 33,2 - 39,8 | Moderado-Alto |
+| `#40A485` | 39,9 - 48,6 | Alto |
+| `#2D82A6` | 48,7 - 60,6 | Muy Alto |
+| `#2A4B8C` | 60,7 - 80,0 | Extremo |
+| `#1A1C78` | 80,1 - 335,1 | Extremo Maximo |
+
+Formato JSON para codigo:
+
+```json
+{
+  "leyenda": "ICS",
+  "configuracion_escala": [
+    {"rango_min": 0.4, "rango_max": 20.0, "hex": "#FFFF99", "categoria": "Bajo"},
+    {"rango_min": 20.1, "rango_max": 27.0, "hex": "#B2FF66", "categoria": "Moderado-Bajo"},
+    {"rango_min": 27.1, "rango_max": 33.1, "hex": "#66FF33", "categoria": "Moderado"},
+    {"rango_min": 33.2, "rango_max": 39.8, "hex": "#4CD164", "categoria": "Moderado-Alto"},
+    {"rango_min": 39.9, "rango_max": 48.6, "hex": "#40A485", "categoria": "Alto"},
+    {"rango_min": 48.7, "rango_max": 60.6, "hex": "#2D82A6", "categoria": "Muy Alto"},
+    {"rango_min": 60.7, "rango_max": 80.0, "hex": "#2A4B8C", "categoria": "Extremo"},
+    {"rango_min": 80.1, "rango_max": 335.1, "hex": "#1A1C78", "categoria": "Extremo Maximo"}
+  ]
+}
+```
+
+## 14. Diccionario de variables IPM (Indice de Pobreza Multidimensional)
+
+15 variables de incidencia a nivel manzana, provenientes de `IPM - Variables (incidencias).xlsx`:
+
+| Codigo | Descripcion | Obs |
+| :--- | :--- | :--- |
+| `analf_` | Analfabetismo (%) | ~9.512 manzanas |
+| `bajo_` | Bajo logro educativo (%) | ~13.484 manzanas |
+| `infancia_` | Barreras para servicios de cuidado de primera infancia (%) | ~6.487 manzanas |
+| `inasis_` | Inasistencia escolar (%) | ~7.435 manzanas |
+| `rezago_` | Rezago escolar (%) | ~12.210 manzanas |
+| `trab_infan_` | Trabajo infantil (%) | ~2.662 manzanas |
+| `depen_` | Dependencia economica (%) | ~13.415 manzanas |
+| `infor_` | Informalidad (%) | ~13.686 manzanas |
+| `salud_` | Barreras de acceso a servicios de salud (%) | ~7.932 manzanas |
+| `asegu_` | Sin aseguramiento a salud (%) | ~13.187 manzanas |
+| `haci_` | Hacinamiento critico (%) | ~9.228 manzanas |
+| `pared_` | Material inadecuado de las paredes exteriores (%) | ~1.425 manzanas |
+| `excre_` | Eliminacion inadecuada de excretas (%) | ~2.008 manzanas |
+| `pisos_` | Material inadecuado de los pisos (%) | ~1.065 manzanas |
+| `agua_` | Sin acceso a fuentes de agua mejorada (%) | ~1.511 manzanas |
+
+Agrupacion por dimensiones IPM:
+
+| Dimension | Variables |
+| :--- | :--- |
+| Educacion | `analf_`, `bajo_`, `infancia_`, `inasis_`, `rezago_` |
+| Trabajo | `trab_infan_`, `depen_`, `infor_` |
+| Salud | `salud_`, `asegu_` |
+| Vivienda | `haci_`, `pared_`, `pisos_` |
+| Servicios | `agua_`, `excre_` |
+
+Variable mas critica: `infor_` (Informalidad >82% promedio).
+Segunda mas critica: `bajo_` (Bajo logro educativo >37% promedio).
