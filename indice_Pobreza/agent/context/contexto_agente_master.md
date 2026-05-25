@@ -311,3 +311,32 @@ Agrupacion por dimensiones IPM:
 
 Variable mas critica: `infor_` (Informalidad >82% promedio).
 Segunda mas critica: `bajo_` (Bajo logro educativo >37% promedio).
+
+## 15. Notebook `02_analisis_ipm_variables.ipynb` - Estructura y cambios
+
+20 celdas (0 markdown + 19 code). Fuente: `IPM - Variables (incidencias).xlsx`.
+
+| Cell | Tipo | Descripcion |
+| :--- | :--- | :--- |
+| 0 | md | # Analisis Exploratorio de Variables IPM |
+| 1 | code | Montar Google Drive (Colab) |
+| 2 | code | Instalar dependencias (pandas, geopandas, matplotlib, seaborn, openpyxl) |
+| 3 | code | Clonar repositorio desde GitHub |
+| 4 | code | Importar librerias (`os, sys, warnings, pandas, numpy, matplotlib, seaborn, geopandas`) |
+| 5 | code | Definir rutas: `BASE_DIR`, `DATA_DIR`, archivo Excel |
+| 6 | code | Definir `diccionario` de 15 variables (codigo -> nombre legible) |
+| 7 | code | Cargar Excel, concatenar todos los sheets en `df_ipm_vars`, renombrar columnas quitando prefijos |
+| 8 | code | `df_ipm_vars.head()` |
+| 9 | code | Estadisticas descriptivas (`df_ipm_vars.describe()`) |
+| 10 | code | Barplot - Incidencia promedio por variable (matplotlib, ordenado descendente) |
+| 11 | code | Boxplots por variable (seaborn `sns.boxplot`) |
+| 12 | code | Manzanas con incidencia >0% por variable (barra horizontal) |
+| 13 | code | Mapa de calor de correlacion entre variables (`sns.heatmap`) |
+| 14 | code | Top 10 manzanas con mayor incidencia acumulada |
+| 15 | code | Agrupacion por dimensiones (Educacion, Trabajo, Salud, Vivienda, Servicios) - boxplot comparativo |
+| 16 | code | Variables mas criticas - ranking horizontal con `means.nlargest()` |
+| 17 | code | **Histogramas** 2x3 de las 6 variables mas criticas (con media y mediana) |
+| 18 | code | **Ranking completo** tabular con barra de color + conclusiones clave |
+| 19 | code | Resumen ejecutivo (prints) |
+
+**Cambios aplicados**: Las celdas 17-18 originales intentaban hacer merge geometrico (`cod_mzn` vs `COD_MZN`) y spatial join con comunas, pero fallaban porque los codigos manzana del Excel (24 chars) no coinciden con los del shapefile ICS (22 chars, `COD_MZN`). Se reemplazaron por analisis puramente tabular (histogramas + ranking) que no depende de geometrias. El error activo era `IndexError: index 0 out of bounds for axis 0 with size 0` en `comuna_plot.plot(kind='barh')` al obtener 0 filas del merge.
