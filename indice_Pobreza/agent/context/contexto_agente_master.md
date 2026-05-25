@@ -339,4 +339,63 @@ Segunda mas critica: `bajo_` (Bajo logro educativo >37% promedio).
 | 18 | code | **Ranking completo** tabular con barra de color + conclusiones clave |
 | 19 | code | Resumen ejecutivo (prints) |
 
-**Cambios aplicados**: Las celdas 17-18 originales intentaban hacer merge geometrico (`cod_mzn` vs `COD_MZN`) y spatial join con comunas, pero fallaban porque los codigos manzana del Excel (24 chars) no coinciden con los del shapefile ICS (22 chars, `COD_MZN`). Se reemplazaron por analisis puramente tabular (histogramas + ranking) que no depende de geometrias. El error activo era `IndexError: index 0 out of bounds for axis 0 with size 0` en `comuna_plot.plot(kind='barh')` al obtener 0 filas del merge.
+**Merge key**: El codigo `cod_mzn` del Excel tiene 24 chars, `COD_MZN` del ICS tiene 22 chars. Los 2 digitos extras en posiciones 6-7 son el numero de comuna. La transformacion `COD_MZN = cod_mzn[:6] + cod_mzn[8:]` matchea **13,614 de 13,687** filas (99.5%).
+
+**Error original (resuelto)**: Las celdas 17-18 originales intentaban merge directo (`cod_mzn` vs `COD_MZN`) sin transformar y daba 0 filas, causando `IndexError: index 0 out of bounds for axis 0 with size 0`. Se reemplazaron por analisis tabular. El merge con transformacion funciona correctamente (ver notebook 01 seccion 20).
+
+## 16. Notebook `01_exploracion_ics_ipm.ipynb` - Estructura actualizada (35 celdas)
+
+| Cell | Tipo | Descripcion |
+| :--- | :--- | :--- |
+| 0 | md | # Exploracion ICS e IPM |
+| 1 | code | Montar Google Drive |
+| 2 | code | Instalar dependencias (+ openpyxl) |
+| 3 | code | Clonar repositorio |
+| 4 | code | Importar librerias (+ numpy) |
+| 5 | code | Definir rutas y descomprimir (+ EXCEL_PATH) |
+| 6 | code | Cargar shapefiles ICS e IPM |
+| 7 | code | Ver columnas disponibles |
+| 8 | code | Vista previa de los datos |
+| 9 | code | CRS |
+| 10 | code | Mapa base - Manzanas ICS |
+| 11 | code | Mapa base - Manzanas IPM |
+| 12 | code | Identificar columna de ICS |
+| **13** | code | **Mapa tematico ICS** (KEEP) |
+| **14** | code | **Mapa tematico IPM** (KEEP) |
+| **15** | code | **Mapas lado a lado** (KEEP) |
+| 16 | code | Estadisticas descriptivas (+ carga Excel 15 vars IPM + top 5) |
+| 17 | md | Enriquecimiento geoespacial |
+| 18 | code | Cargar GeoJSONs auxiliares (comunas, Barrio Obrero, Roosevelt) |
+| 19 | code | Unificar CRS y asignar comuna por spatial join |
+| 20 | code | Vista previa con comuna |
+| 21 | code | Estadisticas ICS, IPM y vars por comuna (+ merge Excel+ICS con key transformada) |
+| 22 | code | Identificar manzanas en zonas especiales |
+| 23 | code | Mapa - Manzanas por comuna con zonas de interes |
+| **24** | code | **Mapa - Variables IPM mas criticas** (top 3 en mapa de Cali) |
+| **25** | code | **Filtrar variables IPM por zona** (Barrio Obrero, Roosevelt) |
+| **26** | code | **Grafico - Comparativa variables IPM por zona** (barras top 5) |
+| **27** | code | **Mapa - Manzanas por zona con ICS e IPM** (color=escala ICS 8 cat, etiqueta=IPM global) |
+| 28 | md | Analisis comparativo: Zonas de interes |
+| 29 | code | Filtrar ICS para cada zona (+ comuna via sjoin) |
+| 30 | code | Filtrar IPM para cada zona (+ comuna via sjoin) |
+| 31 | code | Estadisticas comparativas ICS, IPM global y vars |
+| 32 | code | Graficos comparativos ICS e IPM por zona |
+| 33 | md | Relacion ICS vs IPM |
+| 34 | code | Relacion ICS vs IPM - scatter por zona (np.polyfit) |
+
+**Celdas 13-15**: Sin cambios (mapas tematicos originales).
+**Celdas 24-27**: Nuevas - espacializacion de variables IPM.
+**Nota**: Los sjoin con comuna en celdas 29-30 requieren `.drop(columns=["index_right"], errors="ignore")` antes del segundo sjoin para evitar colision.
+
+## 17. Hallazgo clave: Merge IPM (Excel) + ICS (Shapefile)
+
+| Aspecto | Detalle |
+| :--- | :--- |
+| Excel cod_mzn | 24 chars: `760011` + `CC` + `RRRRRRRRMMMMMMMM` |
+| ICS COD_MZN | 22 chars: `760011` + `RRRRRRRRMMMMMMMM` |
+| Diferencia | 2 digitos de comuna en posiciones 6-7 |
+| Transformacion | `COD_MZN = cod_mzn[:6] + cod_mzn[8:]` |
+| Match | 13,614 / 13,687 filas (99.5%) |
+| Valores de comuna | 01-22, 99 (corregimientos) |
+
+Ver `documentacion/hallazgo_merge_ipm_ics.txt` para detalle completo.
