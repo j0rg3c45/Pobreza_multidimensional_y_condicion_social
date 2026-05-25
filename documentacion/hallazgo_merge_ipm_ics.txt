@@ -1,0 +1,94 @@
+HALLAZGO CLAVE: Merge IPM (Excel) + ICS (Shapefile)
+====================================================
+
+El codigo cod_mzn del Excel IPM - Variables (incidencias).xlsx tiene 24 caracteres,
+mientras que el COD_MZN del shapefile Mzn_ics.shp tiene 22 caracteres.
+La diferencia son los 2 digitos de comuna que el Excel incluye en las posiciones 6-7.
+
+Estructura del codigo:
+  Excel (24 chars): 760011 + CC + RRRRRRRRMMMMMMMM
+  ICS   (22 chars): 760011 + RRRRRRRRMMMMMMMM
+  donde CC = comuna (01-22, 99), RRRRRRRR = sector, MMMMMMMM = manzana
+
+Transformacion para merge:
+  COD_MZN = cod_mzn[:6] + cod_mzn[8:]
+  Es decir, mantener los primeros 6 chars (dept+mpio+clase) y saltarse los 2 de comuna.
+
+Resultado: 13,614 de 13,687 filas del Excel matchean con el shapefile ICS (= 99.5%).
+
+Valores de comuna en posiciones 6-7 del Excel:
+  21=1014, 14=921, 13=900, 15=850, 02=840, 06=813, 17=792, 18=727,
+  19=689, 08=580, 05=561, 10=548, 99=532, 20=531, 16=515, 11=509,
+  04=446, 07=418, 09=346, 12=323, 01=317, 03=308, 22=207
+
+
+ESTRUCTURA DEL NOTEBOOK 01_exploracion_ics_ipm.ipynb (34 celdas)
+================================================================
+
+Cell  Tipo  Descripcion
+----  ----  -----------
+  0   md    # Exploracion ICS e IPM
+  1   code   1. Montar Google Drive
+  2   code   2. Instalar dependencias (+ openpyxl)
+  3   code   3. Clonar repositorio
+  4   code   4. Importar librerias (+ numpy)
+  5   code   5. Definir rutas y descomprimir (+ EXCEL_PATH)
+  6   code   6. Cargar shapefiles (ICS, IPM)
+  7   code   7. Ver columnas disponibles
+  8   code   8. Vista previa de los datos
+  9   code   9. Sistema de referencia de coordenadas (CRS)
+ 10   code  10. Mapa base - Manzanas ICS
+ 11   code  11. Mapa base - Manzanas IPM
+ 12   code  12. Identificar columna de ICS para clasificacion
+ -- KEEP --
+ 13   code  13. Mapa tematico - ICS
+ 14   code  14. Mapa tematico - IPM
+ 15   code  15. Mapas lado a lado (ICS vs IPM)
+ -- MODIFICADO --
+ 16   code  16. Estadisticas descriptivas (+ carga Excel + top 5 IPM)
+ 17   md    ## Enriquecimiento geoespacial
+ 18   code  17. Cargar GeoJSONs auxiliares (comunas, Barrio Obrero, Roosevelt)
+ 19   code  18. Unificar CRS y asignar comuna por spatial join
+ 20   code  19. Vista previa con comuna asignada
+ 21   code  20. Estadisticas por comuna (+ merge Excel+ICS + top 3 vars por comuna)
+ 22   code  21. Identificar manzanas en zonas especiales
+ 23   code  22. Mapa - Manzanas por comuna con zonas de interes
+ -- NUEVAS (espacializacion IPM) --
+ 24   code  23. Mapa - Variables IPM mas criticas (top 3 en mapa de Cali)
+ 25   code  24. Filtrar variables IPM por zona (Barrio Obrero, Roosevelt)
+ 26   code  25. Grafico - Comparativa variables IPM por zona (barras top 5)
+ -- MODIFICADAS --
+ 27   md    ## Analisis comparativo: Zonas de interes (ICS e IPM)
+ 28   code  26. Filtrar ICS para cada zona (spatial join)
+ 29   code  27. Filtrar IPM para cada zona (spatial join)
+ 30   code  28. Estadisticas comparativas ICS, IPM global y vars
+ 31   code  29. Graficos comparativos ICS e IPM por zona
+ 32   md    ## Relacion ICS vs IPM por zona de interes
+ 33   code  30. Relacion ICS vs IPM - scatter por zona (np.polyfit)
+
+VARIABLES IPM (15 del Excel)
+=============================
+Codigo     Descripcion                      Dimension    Promedio
+------     -----------                      ---------    -------
+infor_     Informalidad                     Trabajo      ~82%
+bajo_      Bajo logro educativo             Educacion    ~37%
+depen_     Dependencia economica            Trabajo      ~35%
+rezago_    Rezago escolar                   Educacion    ~25%
+asegu_     Sin aseguramiento en salud       Salud        ~17%
+salud_     Barreras de salud                Salud        ~11%
+analf_     Analfabetismo                    Educacion    ~9%
+haci_      Hacinamiento critico             Vivienda     ~8%
+inasis_    Inasistencia escolar             Educacion    ~7%
+infancia_  Barreras primera infancia        Educacion    ~5%
+agua_      Sin acceso a agua mejorada       Servicios    ~2%
+trab_infan_ Trabajo infantil                Trabajo      ~2%
+excre_     Eliminacion inadecuada excretas   Servicios    ~1%
+pared_     Paredes precarias                Vivienda     ~1%
+pisos_     Pisos precarios                  Vivienda     ~1%
+
+Dimensiones IPM:
+  Educacion: analf_, bajo_, infancia_, inasis_, rezago_
+  Trabajo:   trab_infan_, depen_, infor_
+  Salud:     salud_, asegu_
+  Vivienda:  haci_, pared_, pisos_
+  Servicios: agua_, excre_
