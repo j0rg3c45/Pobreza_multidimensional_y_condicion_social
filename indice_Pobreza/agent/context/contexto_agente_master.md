@@ -238,13 +238,67 @@ Para responder bien sobre este repo, un agente debe leer en este orden:
 
 Este repo ya tiene una metodologia definida y parcialmente consolidada. `Barrio Obrero` es la referencia operativa vigente (periodo 2023-2026 Q1 real, sin Proxy). `Roosevelt` ya esta alineado con esa metodologia. `Avenida Ciudad de Cali` sigue funcional, pero pendiente de migrar desde min-max relativo hacia `ref_min/ref_max` fijos. `Pulmon de Oriente` es la referencia metodologica de fondo y la fuente de los scores provisionales usados en otras zonas. Los datos versionados existen para Roosevelt, Barrio Obrero y Pulmon de Oriente, pero no para Avenida Ciudad de Cali. En Barrio Obrero, `Entorno Urbano` ya puede recalcularse con un proxy experimental de `deficit habitacional 2024` para `Comuna 9`, explicado con un `heatmap` de componentes del deficit cualitativo 2024. Barrio Obrero ahora tiene archivos DATIC con datos hasta 2026 Q1; el analisis anual usa solo 2023-2025 y la serie trimestral incluye Q1 2026 real con 4to color naranja (#FF6F00) en heatmaps y barras.
 
-## 12. Prompt sugerido para otro agente
+## 12. Notebook `03_indice_vulnerabilidad_multidimensional.ipynb` - IVM
+
+28 celdas (3 markdown + 25 code). Fuentes: `Mzn_ics.shp`, `Mzn_ipm.shp`, `IPM - Variables (incidencias).xlsx`, `Comunas.geojson`, zonas Barrio Obrero y Roosevelt.
+
+### Metodología IVM
+
+```
+IVM = 0.40 × score_ICS_invertido + 0.30 × score_IPM + 0.30 × score_vars_críticas
+```
+
+- **ICS invertido**: menor ICS = mayor vulnerabilidad (ref_min=0.4, ref_max=100)
+- **IPM global**: directo (ref_min=0, ref_max=80)
+- **Variables críticas**: promedio de top 5 (informalidad, bajo logro, dependencia, rezago, sin aseguramiento)
+- Escala 0-100, 5 categorías: Baja (0-20), Moderada (20-40), Alta (40-60), Muy alta (60-80), Crítica (80-100)
+
+### Estructura
+
+| Cell | Tipo | Descripción |
+| :--- | :--- | :--- |
+| 0 | md | Introducción IVM |
+| 1-6 | code | Setup: Drive, deps, repo, libs, rutas, carga datos |
+| 7 | code | Merge IPM Excel + ICS (transformación cod_mzn 24→22 chars) |
+| 8 | code | Diccionario 15 variables IPM + dimensiones |
+| 9 | code | Merge consolidado ICS + IPM + Variables |
+| 10 | md | Metodología IVM (pesos, escala, clasificación) |
+| 11 | code | Definir ref_min/ref_max fijos + función score_ref |
+| 12 | code | Calcular scores normalizados |
+| 13 | code | Calcular IVM + clasificación |
+| 14 | code | Asignar comuna por spatial join |
+| 15 | md | Visualizaciones |
+| 16 | code | Paleta Okabe-Ito + estilos |
+| 17 | code | Mapa IVM heatmap territorial (cividis) |
+| 18 | code | Mapa IVM categorías (Okabe-Ito) |
+| 19 | code | Heatmap IVM por comuna × dimensión (cividis) |
+| 20 | code | Barras IVM por comuna (Okabe-Ito) |
+| 21 | code | IVM en zonas de interés (Barrio Obrero, Roosevelt) |
+| 22 | code | Comparativo por zona (línea + relleno) |
+| 23 | code | Mapas IVM por zona (cividis) |
+| 24 | code | Scatter ICS vs IPM coloreado por IVM |
+| 25 | code | Top 20 manzanas más vulnerables |
+| 26 | code | Resumen ejecutivo |
+| 27 | code | Exportar GeoJSON + CSV |
+
+### Visualización
+
+- Paleta categórica: Okabe-Ito (accesible daltonismo)
+- Heatmaps: cividis
+- Gráficas comparativas: línea + relleno (area chart)
+
+### Outputs
+
+- `outputs/IVM_manzanas_cali.geojson` — GeoJSON con IVM por manzana (WGS84)
+- `outputs/IVM_resumen_comunas.csv` — Resumen IVM por comuna
+
+## 13. Prompt sugerido para otro agente
 
 Puedes iniciar a otro agente con este texto:
 
 > Este repo calcula el ITT de zonas urbanas de Cali. La metodologia vigente exige `ref_min/ref_max` fijos por indicador y esta documentada en `agent/knowledge_base/Guia_ITT_Metodologia_Notebook.md`. `notebooks/03_itt_barrio_obrero.ipynb` es la referencia operativa principal; `notebooks/01_itt_roosevelt.ipynb` ya esta alineado a esa logica; `notebooks/02_itt_avenida_ciudad_de_cali.ipynb` sigue funcional pero aun usa min-max relativo y debe tratarse como implementacion pendiente de homologacion. Los valores Proxy actuales provenientes de Pulmon de Oriente son `Entorno Urbano = 39.2`, `Educacion y Desarrollo = 54.9` y `Vulnerabilidad = 54.1`, pero en Barrio Obrero `Entorno Urbano` ya puede sobrescribirse con un proxy experimental de `deficit habitacional 2024` para `Comuna 9`. Ese proxy no tiene periodicidad mensual o trimestral observada; su visualizacion adecuada hoy es el `heatmap` de componentes del deficit cualitativo 2024. Distingue siempre entre datos reales, scores provisionales y metodologia vigente. No inventes outputs no versionados ni asumas que el comparativo ya esta completo.
 
-## 13. Escala de clasificacion del ICS (Indice de Condicion Social)
+## 14. Escala de clasificacion del ICS (Indice de Condicion Social)
 
 El ICS se clasifica en 8 categorias con la siguiente escala de colores y rangos numericos (usar coma como separador decimal):
 
@@ -277,7 +331,7 @@ Formato JSON para codigo:
 }
 ```
 
-## 14. Diccionario de variables IPM (Indice de Pobreza Multidimensional)
+## 15. Diccionario de variables IPM (Indice de Pobreza Multidimensional)
 
 15 variables de incidencia a nivel manzana, provenientes de `IPM - Variables (incidencias).xlsx`:
 
@@ -312,7 +366,7 @@ Agrupacion por dimensiones IPM:
 Variable mas critica: `infor_` (Informalidad >82% promedio).
 Segunda mas critica: `bajo_` (Bajo logro educativo >37% promedio).
 
-## 15. Notebook `02_analisis_ipm_variables.ipynb` - Estructura y cambios
+## 16. Notebook `02_analisis_ipm_variables.ipynb` - Estructura y cambios
 
 20 celdas (0 markdown + 19 code). Fuente: `IPM - Variables (incidencias).xlsx`.
 
@@ -343,7 +397,7 @@ Segunda mas critica: `bajo_` (Bajo logro educativo >37% promedio).
 
 **Error original (resuelto)**: Las celdas 17-18 originales intentaban merge directo (`cod_mzn` vs `COD_MZN`) sin transformar y daba 0 filas, causando `IndexError: index 0 out of bounds for axis 0 with size 0`. Se reemplazaron por analisis tabular. El merge con transformacion funciona correctamente (ver notebook 01 seccion 20).
 
-## 16. Notebook `01_exploracion_ics_ipm.ipynb` - Estructura actualizada (35 celdas)
+## 17. Notebook `01_exploracion_ics_ipm.ipynb` - Estructura actualizada (35 celdas)
 
 | Cell | Tipo | Descripcion |
 | :--- | :--- | :--- |
@@ -387,7 +441,7 @@ Segunda mas critica: `bajo_` (Bajo logro educativo >37% promedio).
 **Celdas 24-27**: Nuevas - espacializacion de variables IPM.
 **Nota**: Los sjoin con comuna en celdas 29-30 requieren `.drop(columns=["index_right"], errors="ignore")` antes del segundo sjoin para evitar colision.
 
-## 17. Hallazgo clave: Merge IPM (Excel) + ICS (Shapefile)
+## 18. Hallazgo clave: Merge IPM (Excel) + ICS (Shapefile)
 
 | Aspecto | Detalle |
 | :--- | :--- |

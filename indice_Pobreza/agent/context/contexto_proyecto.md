@@ -62,3 +62,4 @@ El agente debe diferenciar entre:
 - Para Pulmon de Oriente 2026, se implemento deduplicacion por fecha+coordenada y generacion de valores Proxy para Q2, Q3 y Q4 basados en promedio historico trimestral 2023-2025.
 - Los valores Proxy se marcan con doble asterisco (`**`) en todas las salidas.
 - Referencia metodologica completa: `docs/05_nota_metodologica_proxy_2026.md`.
+- **Nuevo:** `notebooks_py/03_indice_vulnerabilidad_multidimensional.ipynb` calcula el IVM (Indice de Vulnerabilidad Multidimensional) por manzana combinando ICS + IPM + 15 variables IPM. Usa ref_min/ref_max fijos, paleta Okabe-Ito, heatmaps cividis, graficas linea+relleno. Exporta GeoJSON y CSV por comuna.

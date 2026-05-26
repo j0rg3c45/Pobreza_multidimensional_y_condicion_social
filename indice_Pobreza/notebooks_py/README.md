@@ -42,6 +42,14 @@ No necesitas crear un entorno virtual manualmente. `uv run` lo gestiona por ti.
 | `03_itt_barrio_obrero.py` | Barrio Obrero, Comuna 9 | ITT completo + proxy Entorno Urbano | 12 PNG + Excel |
 | `04_itt_pulmon_oriente_2025.py` | Pulmon de Oriente | ITT completo con Proxy** Q2-Q4 2026 | 7 PNG + Excel |
 
+## Notebooks de exploración (.ipynb, Colab-ready)
+
+| Notebook | Contenido | Fuentes |
+|---|---|---|
+| `01_exploracion_ics_ipm.ipynb` | Exploración ICS e IPM, mapas temáticos, enriquecimiento por comuna y zona | Shapefiles ICS/IPM, GeoJSONs zonas, Excel IPM |
+| `02_analisis_ipm_variables.ipynb` | Análisis exploratorio de 15 variables IPM (incidencias) | Excel IPM Variables |
+| `03_indice_vulnerabilidad_multidimensional.ipynb` | **IVM** — Índice de Vulnerabilidad Multidimensional por manzana | ICS + IPM + Excel IPM + Comunas + Zonas |
+
 ## Scripts auxiliares en notebooks/
 
 Ademas de los scripts ejecutables, existen scripts auxiliares en `notebooks/` que contienen el codigo fuente para reemplazar celdas del notebook de Colab:
