@@ -27,3 +27,6 @@ outputs/*
 .venv/
 env/
 venv/
+
+# QGIS lock files
+*.sr.lock
