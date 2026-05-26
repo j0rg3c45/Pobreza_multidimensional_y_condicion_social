@@ -502,13 +502,15 @@ Misma estructura que notebook 04 (Roosevelt), adaptado a Barrio Obrero.
 
 ## 17.3. IPM Global comparativo por zona de estudio
 
+**Interpretacion del IPM:** El IPM es un indicador **inverso**. Mas cercano a 0 = mejor (menos pobreza), mas cercano a 100 = peor (mas privaciones). Un hogar se considera en pobreza multidimensional cuando IPM >= 33.3%. Lo mismo aplica para las 15 variables desagregadas: mayor valor = peor situacion.
+
 | Zona | Manzanas con IPM | IPM Promedio | IPM Min | IPM Max |
 | :--- | :--- | :--- | :--- | :--- |
 | Cali (ciudad) | 11,026 | 16.60 | 0.20 | 100.00 |
 | Barrio Obrero | 11 | 13.18 | 2.00 | 25.60 |
 | Roosevelt | 21 | 7.51 | 2.50 | 25.00 |
 
-Ambas zonas de estudio estan por debajo del promedio ciudad. Barrio Obrero supera al promedio en informalidad (+13 pts), bajo logro educativo (+18 pts) e inasistencia escolar (+4 pts).
+Ambas zonas de estudio estan por debajo del promedio ciudad (mejor situacion). Roosevelt esta en mejor condicion que Barrio Obrero. Sin embargo, Barrio Obrero supera al promedio ciudad en informalidad (+13 pts), bajo logro educativo (+18 pts) e inasistencia escolar (+4 pts).
 
 ## 18. Hallazgo clave: Merge IPM (Excel) + ICS (Shapefile)
 
