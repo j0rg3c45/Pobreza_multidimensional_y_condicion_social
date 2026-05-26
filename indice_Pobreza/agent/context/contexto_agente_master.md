@@ -459,7 +459,7 @@ Segunda mas critica: `bajo_` (Bajo logro educativo >37% promedio).
 
 ### Capas del mapa (orden de abajo a arriba)
 
-1. Fondo manzanas ICS (`ics_mzn.geojson`) — gris claro `#F0F0F0`, bordes `#CCCCCC`, zorder=1
+1. Fondo manzanas catastrales (`geojson_Manzanas_catastrales.geojson`) — gris claro `#F0F0F0`, bordes `#CCCCCC`, zorder=1
 2. Poligono area estudio (`tramos_Roosevelt_Buffer_100.geojson`) — borde rojo `#E63946`, discontinuo, zorder=2
 3. Manzanas IPM con datos — escala cividis 8 niveles, zorder=3
 4. Etiquetas de valor — texto blanco con contorno negro, zorder=4
@@ -481,6 +481,34 @@ Segunda mas critica: `bajo_` (Bajo logro educativo >37% promedio).
 ### Descarga de GeoJSON
 
 En Colab, la celda 6 usa `google.colab.files.download()` para descargar el archivo directamente al PC del usuario.
+
+## 17.2. Notebook `05_mapeo_ipm_barrio_obrero.ipynb` - Mapeo Geoespacial IPM Barrio Obrero
+
+Misma estructura que notebook 04 (Roosevelt), adaptado a Barrio Obrero.
+
+- **Datos IPM:** `IPM_GEO/geojson_filtrado_poligono_Barrio_Obrero/Mzn_ipm_filtrado_poligono_Barrio_Obrero.geojson` (16 manzanas, 15 variables)
+- **Fondo:** `geojson_Manzanas_catastrales/geojson_Manzanas_catastrales.geojson`
+- **Area de estudio:** `Geojson_Barrio_Obrero/Geojson_Barrio_Obrero_cambioArea.geojson`
+- Paleta: cividis 8 categorias (accesible daltonismo)
+- Celda de descarga GeoJSON via Colab
+
+### Top 5 variables IPM en Barrio Obrero
+
+1. Informalidad (INFOR_): 84.66
+2. Bajo logro educativo (BAJO_): 49.96
+3. Dependencia economica (DEPEN_): 21.79
+4. Rezago escolar (REZAGO_): 17.84
+5. Sin aseguramiento (ASEGU_): 12.06
+
+## 17.3. IPM Global comparativo por zona de estudio
+
+| Zona | Manzanas con IPM | IPM Promedio | IPM Min | IPM Max |
+| :--- | :--- | :--- | :--- | :--- |
+| Cali (ciudad) | 11,026 | 16.60 | 0.20 | 100.00 |
+| Barrio Obrero | 11 | 13.18 | 2.00 | 25.60 |
+| Roosevelt | 21 | 7.51 | 2.50 | 25.00 |
+
+Ambas zonas de estudio estan por debajo del promedio ciudad. Barrio Obrero supera al promedio en informalidad (+13 pts), bajo logro educativo (+18 pts) e inasistencia escolar (+4 pts).
 
 ## 18. Hallazgo clave: Merge IPM (Excel) + ICS (Shapefile)
 

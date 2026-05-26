@@ -27,7 +27,7 @@
 
 - Estado: implementado.
 - Notebook: `notebooks/03_itt_barrio_obrero.ipynb`
-- Unidad de analisis: poligono unico del barrio.
+- Unidad de analisis: poligono del barrio (actualizado a `Geojson_Barrio_Obrero_cambioArea.geojson`, 16 manzanas IPM).
 - Metodo espacial: no requiere spatial join por tramo.
 - Periodo: 2023-2026 (Q1 2026 real, sin Proxy).
 - Periodo anual (base): solo 2023-2025 (años completos con datos reales).
