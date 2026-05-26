@@ -63,3 +63,4 @@ El agente debe diferenciar entre:
 - Los valores Proxy se marcan con doble asterisco (`**`) en todas las salidas.
 - Referencia metodologica completa: `docs/05_nota_metodologica_proxy_2026.md`.
 - **Nuevo:** `notebooks_py/03_indice_vulnerabilidad_multidimensional.ipynb` calcula el IVM (Indice de Vulnerabilidad Multidimensional) por manzana combinando ICS + IPM + 15 variables IPM. Usa ref_min/ref_max fijos, paleta Okabe-Ito, heatmaps cividis, graficas linea+relleno. Exporta GeoJSON y CSV por comuna.
+- **Nuevo:** `notebooks_py/04_mapeo_ipm_roosevelt.ipynb` genera mapas geoespaciales de las 5 variables IPM mas criticas en el corredor Roosevelt (Buffer 100m). Usa escala semantica de 8 categorias con paleta cividis (accesible daltonismo), fondo de manzanas ICS, poligono del area de estudio destacado, y celda de descarga del GeoJSON via Colab.

@@ -441,6 +441,47 @@ Segunda mas critica: `bajo_` (Bajo logro educativo >37% promedio).
 **Celdas 24-27**: Nuevas - espacializacion de variables IPM.
 **Nota**: Los sjoin con comuna en celdas 29-30 requieren `.drop(columns=["index_right"], errors="ignore")` antes del segundo sjoin para evitar colision.
 
+## 17.1. Notebook `04_mapeo_ipm_roosevelt.ipynb` - Mapeo Geoespacial IPM Roosevelt
+
+6 celdas (1 markdown + 5 code). Fuente: `Mzn_ipm_variables_filtrado_tramos_Roosevelt_Buffer_100.geojson`.
+
+### Estructura
+
+| Cell | Tipo | Descripcion |
+| :--- | :--- | :--- |
+| 0 | md | Introduccion: Analisis Geoespacial IPM - Roosevelt |
+| 1 | code | Instalacion dependencias (Colab) |
+| 2 | code | Importar librerias + clonar/actualizar repo + cargar 3 capas (IPM vars, fondo manzanas ICS, area estudio buffer) + unificar CRS a WGS84 |
+| 3 | code | Identificar 15 variables IPM, seleccionar Top 5 por incidencia promedio |
+| 4 | code | Funcion `plot_ipm_variable()` con escala semantica 8 categorias (cividis accesible daltonismo), fondo manzanas gris, poligono area estudio rojo discontinuo, etiquetas valor, leyenda externa |
+| 5 | code | Generar 5 mapas prioritarios |
+| 6 | code | Descargar GeoJSON a PC (google.colab.files.download) |
+
+### Capas del mapa (orden de abajo a arriba)
+
+1. Fondo manzanas ICS (`ics_mzn.geojson`) — gris claro `#F0F0F0`, bordes `#CCCCCC`, zorder=1
+2. Poligono area estudio (`tramos_Roosevelt_Buffer_100.geojson`) — borde rojo `#E63946`, discontinuo, zorder=2
+3. Manzanas IPM con datos — escala cividis 8 niveles, zorder=3
+4. Etiquetas de valor — texto blanco con contorno negro, zorder=4
+
+### Paleta accesible (daltonismo)
+
+- Colormap: `cividis` discretizado en 8 niveles
+- Categorias: Bajo, Moderado-Bajo, Moderado, Moderado-Alto, Alto, Muy Alto, Extremo, Extremo Maximo
+- Rangos escalados proporcionalmente al `ref_max` de cada indicador
+
+### Top 5 variables IPM en Roosevelt (por incidencia promedio)
+
+1. Informalidad (INFOR_)
+2. Sin aseguramiento salud (ASEGU_)
+3. Dependencia economica (DEPEN_)
+4. Bajo logro educativo (BAJO_)
+5. Rezago escolar (REZAGO_)
+
+### Descarga de GeoJSON
+
+En Colab, la celda 6 usa `google.colab.files.download()` para descargar el archivo directamente al PC del usuario.
+
 ## 18. Hallazgo clave: Merge IPM (Excel) + ICS (Shapefile)
 
 | Aspecto | Detalle |
