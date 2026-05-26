@@ -67,4 +67,8 @@ El agente debe diferenciar entre:
 - **Nuevo:** `notebooks_py/05_mapeo_ipm_barrio_obrero.ipynb` genera mapas geoespaciales de las 5 variables IPM mas criticas en Barrio Obrero. Misma estructura que Roosevelt. Usa el nuevo poligono `Geojson_Barrio_Obrero_cambioArea.geojson` (16 manzanas).
 - **Cambio de poligono Barrio Obrero:** Todos los notebooks (01, 03, 05) ahora usan `Geojson_Barrio_Obrero_cambioArea.geojson` en vez del poligono original. La nueva area incluye 16 manzanas IPM (antes 9).
 - **Paleta accesible daltonismo:** Todos los mapas del proyecto usan `cividis` como paleta de color (accesible para deuteranopia y protanopia).
-- **IPM Global comparativo:** Cali promedio = 16.60, Barrio Obrero = 13.18 (11 mzn con dato), Roosevelt = 7.51 (21 mzn con dato). Ambas zonas estan por debajo del promedio ciudad.
+- **Nuevo:** El `notebooks_py/02_analisis_ipm_variables.ipynb` fue actualizado para incluir un **Análisis de Severidad (IPM > 0)**. Este cálculo promedia las 15 variables de incidencia únicamente en manzanas que presentan pobreza, permitiendo entender la profundidad de la carencia en los hogares afectados.
+- **IPM Global comparativo (Severidad IPM > 0):** Cali Urbana = 15.28, Cali Rural = 38.33, Barrio Obrero = 13.18 (11 mzn con dato), Roosevelt = 7.51 (21 mzn con dato).
+- **Hallazgo crítico Barrio Obrero:** Presenta una severidad de **Informalidad del 93.1%**, superando el promedio urbano.
+- **Hallazgo crítico Roosevelt:** Presenta una severidad de **Sin Aseguramiento en Salud del 22.7%**, superando el promedio urbano.
+- **Brecha Rural:** La severidad rural es crítica en infraestructura básica (Eliminación de excretas: 41.9% y Agua mejorada: 27.0%).
