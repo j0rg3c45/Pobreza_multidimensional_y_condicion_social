@@ -300,7 +300,7 @@ Puedes iniciar a otro agente con este texto:
 
 ## 14. Escala de clasificacion del ICS (Indice de Condicion Social)
 
-El ICS se clasifica en 8 categorias con la siguiente escala de colores y rangos numericos (usar coma como separador decimal):
+El IPM Y ICS se clasifica en 8 categorias con la siguiente escala de colores y rangos numericos (usar coma como separador decimal):
 
 | HEX | Rango | Categoria |
 | :--- | :--- | :--- |
