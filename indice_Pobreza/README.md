@@ -23,8 +23,8 @@ Proxy del nivel de ingresos basado en el **clima educativo** y el **índice de h
 
 ### Estándares Técnicos
 - **Accesibilidad:** Uso estricto de la paleta **Cividis** (colorblind-friendly).
-- **Cartografía:** Mapas dinámicos con fondo de manzanas catastrales atenuado y contornos destacados para áreas de estudio.
-- **Visualización:** Regla de contraste dinámico para etiquetas (blanco sobre color, negro sobre cero).
+- **Cartografía (Efecto Atlas):** Mapas de alta fidelidad donde el tejido urbano de manzanas catastrales cubre el 100% del lienzo, incluyendo el fondo de las leyendas.
+- **Visualización:** Regla de contraste dinámico para etiquetas (blanco sobre color, negro sobre cero) y leyendas semi-transparentes integradas.
 - **Idioma:** Español técnico colombiano y codificación UTF-8.
 
 ## 📂 Estructura del Repositorio
