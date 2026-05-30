@@ -304,14 +304,14 @@ El IPM Y ICS se clasifica en 8 categorias con la siguiente escala de colores y r
 
 | HEX | Rango | Categoria |
 | :--- | :--- | :--- |
-| `#FFFF99` | 0,4 - 20,0 | Bajo |
-| `#B2FF66` | 20,1 - 27,0 | Moderado-Bajo |
-| `#66FF33` | 27,1 - 33,1 | Moderado |
-| `#4CD164` | 33,2 - 39,8 | Moderado-Alto |
-| `#40A485` | 39,9 - 48,6 | Alto |
-| `#2D82A6` | 48,7 - 60,6 | Muy Alto |
-| `#2A4B8C` | 60,7 - 80,0 | Extremo |
-| `#1A1C78` | 80,1 - 335,1 | Extremo Maximo |
+| `#00224e` | 0,4 - 20,0 | Bajo |
+| `#213b6e` | 20,1 - 27,0 | Moderado-Bajo |
+| `#4c556c` | 27,1 - 33,1 | Moderado |
+| `#6c6e72` | 33,2 - 39,8 | Moderado-Alto |
+| `#8e8978` | 39,9 - 48,6 | Alto |
+| `#b1a570` | 48,7 - 60,6 | Muy Alto |
+| `#d9c55c` | 60,7 - 80,0 | Extremo |
+| `#fee838` | 80,1 - 335,1 | Extremo Maximo |
 
 Formato JSON para codigo:
 
@@ -319,14 +319,14 @@ Formato JSON para codigo:
 {
   "leyenda": "ICS",
   "configuracion_escala": [
-    {"rango_min": 0.4, "rango_max": 20.0, "hex": "#FFFF99", "categoria": "Bajo"},
-    {"rango_min": 20.1, "rango_max": 27.0, "hex": "#B2FF66", "categoria": "Moderado-Bajo"},
-    {"rango_min": 27.1, "rango_max": 33.1, "hex": "#66FF33", "categoria": "Moderado"},
-    {"rango_min": 33.2, "rango_max": 39.8, "hex": "#4CD164", "categoria": "Moderado-Alto"},
-    {"rango_min": 39.9, "rango_max": 48.6, "hex": "#40A485", "categoria": "Alto"},
-    {"rango_min": 48.7, "rango_max": 60.6, "hex": "#2D82A6", "categoria": "Muy Alto"},
-    {"rango_min": 60.7, "rango_max": 80.0, "hex": "#2A4B8C", "categoria": "Extremo"},
-    {"rango_min": 80.1, "rango_max": 335.1, "hex": "#1A1C78", "categoria": "Extremo Maximo"}
+    {"rango_min": 0.4, "rango_max": 20.0, "hex": "#00224e", "categoria": "Bajo"},
+    {"rango_min": 20.1, "rango_max": 27.0, "hex": "#213b6e", "categoria": "Moderado-Bajo"},
+    {"rango_min": 27.1, "rango_max": 33.1, "hex": "#4c556c", "categoria": "Moderado"},
+    {"rango_min": 33.2, "rango_max": 39.8, "hex": "#6c6e72", "categoria": "Moderado-Alto"},
+    {"rango_min": 39.9, "rango_max": 48.6, "hex": "#8e8978", "categoria": "Alto"},
+    {"rango_min": 48.7, "rango_max": 60.6, "hex": "#b1a570", "categoria": "Muy Alto"},
+    {"rango_min": 60.7, "rango_max": 80.0, "hex": "#d9c55c", "categoria": "Extremo"},
+    {"rango_min": 80.1, "rango_max": 335.1, "hex": "#fee838", "categoria": "Extremo Maximo"}
   ]
 }
 ```
