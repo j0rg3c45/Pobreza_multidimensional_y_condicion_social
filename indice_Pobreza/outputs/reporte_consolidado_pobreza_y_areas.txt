@@ -1,0 +1,85 @@
+=====================================================================
+REPORTE CONSOLIDADO: POBREZA MULTIDIMENSIONAL Y ÁREAS TERRITORIALES
+Fecha de actualización: 2026-05-30 
+=====================================================================
+
+1. RESUMEN DE ÁREAS GEOGRÁFICAS
+---------------------------------------------------------------------
+Proyección: Magna-SIRGAS / Origen Nacional (EPSG:9377)
+
+Zona/Tramo             Área (m2)    Área (Ha)
+         Barrio Obrero   377,466.70  37.75
+Ciudad De Cali (Total) 4,339,666.10 433.97
+     Ciudad De Cali T1   282,092.04  28.21
+     Ciudad De Cali T2   371,706.73  37.17
+     Ciudad De Cali T3   727,930.26  72.79
+     Ciudad De Cali T4   621,340.12  62.13
+     Ciudad De Cali T5   346,901.65  34.69
+     Ciudad De Cali T6   396,898.72  39.69
+     Ciudad De Cali T7 1,118,667.99 111.87
+     Ciudad De Cali T8   474,128.59  47.41
+               Oriente 5,515,022.83 551.50
+             Roosevelt   429,175.57  42.92
+
+2. CONTEO DE MANZANAS CON SEVERIDAD (IPM > 0)
+---------------------------------------------------------------------
+Cali Urbana........................ 10539 manzanas
+Cali Rural......................... 254 manzanas
+Barrio Obrero...................... 36 manzanas
+Oriente............................ 901 manzanas
+Roosevelt.......................... 21 manzanas
+Ciudad De Cali T1.................. 34 manzanas
+Ciudad De Cali T2.................. 41 manzanas
+Ciudad De Cali T3.................. 76 manzanas
+Ciudad De Cali T4.................. 98 manzanas
+Ciudad De Cali T5.................. 60 manzanas
+Ciudad De Cali T6.................. 82 manzanas
+Ciudad De Cali T7.................. 35 manzanas
+Ciudad De Cali T8.................. 1 manzanas
+Ciudad De Cali (Total)............. 427 manzanas
+
+3. ESTADÍSTICAS DE SEVERIDAD (PROMEDIOS IPM > 0)
+---------------------------------------------------------------------
+Nota: Los valores representan el porcentaje de privación en cada dimensión.
+
+                        ANALF_  BAJO_  INFANCIA_  INASIS_  REZAGO_  TRAB_INFAN  DEPEN_  INFOR_  SALUD_  ASEGU_  HACI_  PARED_  EXCRE_  PISOS_  AGUA_    ipm
+Cali Urbana               6.77  39.13       3.22     4.92    18.91        0.97   25.18   83.13    5.25   22.42   8.74    0.70    1.19    0.36   0.73  15.28
+Cali Rural               11.61  60.98       5.02     8.23    31.84        2.45   34.03   87.79    4.62   22.35  21.65   15.83   41.87    7.00  27.02  38.33
+Barrio Obrero             6.52  54.21       2.23     6.71    19.65        2.24   27.27   93.80    2.03   18.69  12.11    0.21    0.86    0.31   0.53  16.98
+Oriente                   8.89  50.58       3.89     6.22    22.66        1.13   29.17   85.89    4.78   22.46  10.16    1.36    2.09    0.74   1.07  21.00
+Roosevelt                 4.94  15.79       2.73     1.62     8.60        0.00   20.42   72.79    2.29   22.71   3.74    0.04    0.37    0.00   0.28   7.51
+Ciudad De Cali T1         7.00  39.99       3.48     3.96    14.18        0.69   24.05   81.34    3.84   22.54   6.00    0.03    0.06    0.07   0.03  11.94
+Ciudad De Cali T2         5.29  36.50       2.27     3.73    13.39        0.54   20.30   80.52    6.94   21.45   6.42    0.08    0.25    0.00   0.15   9.17
+Ciudad De Cali T3         7.40  39.79       1.93     2.87    18.61        0.98   20.34   82.31    4.43   22.68   5.89    0.21    0.14    0.02   0.03  11.81
+Ciudad De Cali T4        10.96  52.53       3.13     7.06    23.27        0.90   29.25   86.60    5.87   23.09   9.32    0.35    0.84    0.40   0.41  22.17
+Ciudad De Cali T5        10.09  55.05       3.92     7.50    24.63        1.03   30.20   89.22    4.25   25.98  12.34    0.41    0.45    0.57   0.35  23.28
+Ciudad De Cali T6         5.06  30.16       3.56     4.82    18.35        0.18   24.76   84.39    6.75   24.99   5.71    0.00    0.08    0.01   0.08  13.03
+Ciudad De Cali T7         2.16  12.69       2.35     2.90     7.01        0.37   19.34   71.47    2.95   20.72   2.15    0.00    0.10    0.02   0.01   6.49
+Ciudad De Cali T8         0.00  24.39       0.00     0.00    14.63        0.00   24.39   73.17    0.00   21.95  36.59    0.00   68.29    0.00  85.37  22.00
+Ciudad De Cali (Total)    7.47  40.45       2.98     5.02    18.66        0.70   24.84   83.50    5.24   23.39   7.37    0.19    0.50    0.19   0.38  15.38
+
+4. NOTAS METODOLÓGICAS SOBRE CIFRAS DE POBREZA (IPM)
+---------------------------------------------------------------------
+* INTERPRETACIÓN DE PROMEDIOS:
+  - El promedio de Cali Urbana (15.28% de severidad) es un valor 'diluido' 
+    por la inclusión de más de 10,000 manzanas, muchas de las cuales tienen 
+    niveles de pobreza muy bajos o nulos.
+  - Las zonas de estudio (Oriente, Barrio Obrero, Tramos T5/T4) muestran 
+    promedios superiores precisamente porque son focos de vulnerabilidad 
+    identificados para intervención ITT.
+
+* SEVERIDAD vs. INCIDENCIA GLOBAL:
+  - Los cálculos de este reporte se basan en SEVERIDAD (promedio de manzanas 
+    donde IPM > 0). Esto permite observar la profundidad de la pobreza en 
+    quienes ya la padecen.
+  - Un IPM Global de ciudad (incluyendo manzanas con 0% pobreza) será 
+    naturalmente menor que el de una zona de alta vulnerabilidad.
+
+* OBSERVACIONES TERRITORIALES:
+  - ORIENTE: Presenta una severidad del 21.0%, consolidándose como la zona 
+    de mayor privación multidimensional del estudio.
+  - BARRIO OBRERO: Aunque su IPM global es cercano al urbano, su Informalidad 
+    es crítica (93.8%), superando la media distrital.
+
+=====================================================================
+Fin del Reporte
