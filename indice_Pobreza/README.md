@@ -1,71 +1,65 @@
-# Índice de Condición Social (ICS) — Pobreza Multidimensional
+# Índice de Pobreza Multidimensional (IPM) y Condición Social - Cali
 
-Análisis geoespacial del **Índice de Condición Social (ICS)** y su relación con el **Índice de Pobreza Multidimensional (IPM)** a nivel de manzana en el distrito de Santiago de Cali, Colombia.
+Análisis geoespacial avanzado del **Índice de Pobreza Multidimensional (IPM)** y su correlación con el **Índice de Condición Social (ICS)** a nivel de manzana en el Distrito Especial de Santiago de Cali, Colombia.
 
-## Contexto
+Este proyecto prioriza la identificación de carencias críticas y la severidad de la pobreza en territorios estratégicos para la intervención social.
 
-El ICS es un proxy del nivel de ingresos de los hogares que combina **clima educativo** (años promedio de educación de miembros ≥15 años) e **índice de hacinamiento** (personas por cuarto, incluyendo sala y comedor). Su fórmula es:
+## 📍 Zonas de Estudio Prioritarias
 
-```
-ICS = Clima educativo / Índice de hacinamiento
-```
+El análisis se centra en cuatro áreas clave del desarrollo urbano y la transformación territorial:
 
-A partir de la posición relativa de los hogares en la estructura socioeconómica distrital, se reclasifica en seis estratos:
+1.  **Barrio Obrero:** Análisis de severidad en un sector histórico con alta informalidad (93.1%).
+2.  **Corredor Roosevelt (Buffer 100m):** Evaluación del impacto de barreras en salud (22.7%) y servicios.
+3.  **Pulmón de Oriente:** Integración de indicadores de vulnerabilidad en el sector del Oriente de Cali.
+4.  **Ciudad de Cali (Referente Distrital):** Línea base comparativa que abarca los 8 tramos del corredor principal.
 
-| ICS | Categoría  | Hogares  |
-|-----|------------|----------|
-| 1   | Muy baja   | 10% inferior |
-| 2   | Baja       | 15%      |
-| 3   | Media-baja | 25%      |
-| 4   | Media      | 25%      |
-| 5   | Media-alta | 15%      |
-| 6   | Alta       | 10% superior |
+## 📊 Metodología y Enfoque
 
-## Estructura del proyecto
+### IPM (Prioridad)
+Se analizan 15 variables de incidencia agrupadas en dimensiones de educación, salud, vivienda y mercado laboral. El enfoque principal es el **Análisis de Severidad (IPM > 0)**, el cual promedia las carencias únicamente en los hogares que ya presentan condiciones de pobreza, permitiendo entender la profundidad de la exclusión.
+
+### ICS (Índice de Condición Social)
+Proxy del nivel de ingresos basado en el **clima educativo** y el **índice de hacinamiento**. Se utiliza para clasificar las manzanas en 6 categorías socioeconómicas y correlacionar la vulnerabilidad con el IPM.
+
+### Estándares Técnicos
+- **Accesibilidad:** Uso estricto de la paleta **Cividis** (colorblind-friendly).
+- **Cartografía:** Mapas dinámicos con fondo de manzanas catastrales atenuado y contornos destacados para áreas de estudio.
+- **Visualización:** Regla de contraste dinámico para etiquetas (blanco sobre color, negro sobre cero).
+- **Idioma:** Español técnico colombiano y codificación UTF-8.
+
+## 📂 Estructura del Repositorio
 
 ```
 indice_Pobreza/
 ├── agent/              # Contexto y base de conocimiento para agentes de IA
-│   ├── context/        # Glosario, zonas de estudio, contexto del proyecto
-│   ├── knowledge_base/ # Guía metodológica de referencia
-│   └── prompts/        # System prompts para agentes
-├── data/               # Shapefiles y GeoJSON de ICS e IPM por manzana
-├── docs/               # Documentación metodológica
-├── notebooks_py/       # Notebooks de exploración y análisis (Colab-ready)
-├── outputs/            # Resultados y seguimiento del proyecto
+│   ├── context/        # Glosario, zonas de estudio y reglas geoinformáticas
+│   ├── knowledge_base/ # Guía ITT y Notas Metodológicas
+│   └── prompts/        # Prompts especializados
+├── data/               # GeoJSONs y polígonos (IPM, ICS, Manzanas, Tramos)
+├── docs/               # Documentación metodológica profunda
+├── notebooks_py/       # Notebooks de análisis (01-05) optimizados para Colab
+├── outputs/            # Mapas, reportes y estadísticas consolidadas
 ├── requirements.txt
 └── environment.yml
 ```
 
-## Datos
+## 🚀 Notebooks Principales
 
-Los shapefiles en `data/` contienen geometrías a nivel de **manzana** con:
+- `01_exploracion_ics_ipm.ipynb`: Análisis global, promedios por comuna y mapas de corredores unificados.
+- `03_indice_vulnerabilidad_multidimensional.ipynb`: Cálculo del IVM (ICS + IPM).
+- `04_mapeo_ipm_roosevelt.ipynb`: Cartografía detallada del sector Roosevelt.
+- `05_mapeo_ipm_barrio_obrero.ipynb`: Cartografía detallada del Barrio Obrero (16 manzanas).
 
-- **ICS**: Índice de Condición Social y sus componentes (clima educativo, hacinamiento)
-- **IPM**: Índice de Pobreza Multidimensional
-- **Comunas**: División político-administrativa de Cali
-- **Barrios**: Límites de barrios con indicadores sociales históricos
+## 🛠️ Uso
 
-Sistema de referencia: MAGNA-SIRGAS / Colombia Oeste (EPSG:3115).
-
-## Uso
-
-### Local
-
+### Local (con `uv` o `conda`)
 ```bash
-conda env create -f environment.yml
-conda activate indice_ingresos_operacionales
+# Recomendado: uv
+uv run jupyter notebook
 ```
 
 ### Google Colab
+Abrir los notebooks directamente desde el repositorio de GitHub: `j0rg3c45/Pobreza_multidimensional_y_condicion_social`.
 
-Abrir `notebooks_py/01_exploracion_ics_ipm.ipynb` desde:
-
-1. https://colab.research.google.com/
-2. `File → Open notebook → GitHub`
-3. Repositorio: `j0rg3c45/Pobreza_multidimensional_y_condicion_social`
-
-## Referencias
-
-- Barbary et al. (1999); Barbary & Raberono (2002); Dureau et al. (2007, 2012); Salas Vanegas (2008)
-- Metodología completa en [`docs/metodologia.md`](docs/metodologia.md)
+---
+*Desarrollado como parte del proyecto de Gobierno de Datos y Data Stewardship para el análisis de la pobreza en Cali.*
