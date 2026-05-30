@@ -22,9 +22,9 @@ Se analizan 15 variables de incidencia agrupadas en dimensiones de educación, s
 Proxy del nivel de ingresos basado en el **clima educativo** y el **índice de hacinamiento**. Se utiliza para clasificar las manzanas en 6 categorías socioeconómicas y correlacionar la vulnerabilidad con el IPM.
 
 ### Estándares Técnicos
-- **Accesibilidad:** Uso estricto de la paleta **Cividis** (colorblind-friendly).
+- **Accesibilidad:** Uso estricto de paletas optimizadas para daltónicos (Colorblind-friendly). Se utiliza **Viridis** para el IPM y **Cividis** para el ICS para facilitar la diferenciación visual en comparativas.
 - **Cartografía (Efecto Atlas):** Mapas de alta fidelidad donde el tejido urbano de manzanas catastrales cubre el 100% del lienzo, incluyendo el fondo de las leyendas.
-- **Visualización:** Regla de contraste dinámico para etiquetas (blanco sobre color, negro sobre cero) y leyendas semi-transparentes integradas.
+- **Visualización:** Etiquetas y leyendas redondeadas a **un (1) decimal** (ej. 14.5%). Regla de contraste dinámico para etiquetas (blanco sobre color, negro sobre cero).
 - **Idioma:** Español técnico colombiano y codificación UTF-8.
 
 ## 📂 Estructura del Repositorio
