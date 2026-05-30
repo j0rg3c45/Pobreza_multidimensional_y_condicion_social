@@ -317,7 +317,7 @@ Formato JSON para codigo:
 
 ```json
 {
-  "leyenda": "ICS",
+  "leyenda": "IPM",
   "configuracion_escala": [
     {"rango_min": 0.4, "rango_max": 20.0, "hex": "#00224e", "categoria": "Bajo"},
     {"rango_min": 20.1, "rango_max": 27.0, "hex": "#213b6e", "categoria": "Moderado-Bajo"},
