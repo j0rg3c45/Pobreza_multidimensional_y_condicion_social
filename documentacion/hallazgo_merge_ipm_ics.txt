@@ -22,8 +22,8 @@ Valores de comuna en posiciones 6-7 del Excel:
   04=446, 07=418, 09=346, 12=323, 01=317, 03=308, 22=207
 
 
-ESTRUCTURA DEL NOTEBOOK 01_exploracion_ics_ipm.ipynb (34 celdas)
-================================================================
+ESTRUCTURA DEL NOTEBOOK 01_exploracion_ics_ipm.ipynb
+=================================================
 
 Cell  Tipo  Descripcion
 ----  ----  -----------
@@ -31,40 +31,36 @@ Cell  Tipo  Descripcion
   1   code   1. Montar Google Drive
   2   code   2. Instalar dependencias (+ openpyxl)
   3   code   3. Clonar repositorio
-  4   code   4. Importar librerias (+ numpy)
-  5   code   5. Definir rutas y descomprimir (+ EXCEL_PATH)
-  6   code   6. Cargar shapefiles (ICS, IPM)
+  4   code   4. Configuracion de Idioma y Estilo Visual
+  5   code   5. Definir rutas maestros
+  6   code   6. Cargar GeoJSON maestros
   7   code   7. Ver columnas disponibles
   8   code   8. Vista previa de los datos
   9   code   9. Sistema de referencia de coordenadas (CRS)
  10   code  10. Mapa base - Manzanas ICS
  11   code  11. Mapa base - Manzanas IPM
  12   code  12. Identificar columna de ICS para clasificacion
- -- KEEP --
  13   code  13. Mapa tematico - ICS
  14   code  14. Mapa tematico - IPM
- 15   code  15. Mapas lado a lado (ICS vs IPM)
- -- MODIFICADO --
- 16   code  16. Estadisticas descriptivas (+ carga Excel + top 5 IPM)
- 17   md    ## Enriquecimiento geoespacial
- 18   code  17. Cargar GeoJSONs auxiliares (comunas, Barrio Obrero, Roosevelt)
- 19   code  18. Unificar CRS y asignar comuna por spatial join
- 20   code  19. Vista previa con comuna asignada
- 21   code  20. Estadisticas por comuna (+ merge Excel+ICS + top 3 vars por comuna)
- 22   code  21. Identificar manzanas en zonas especiales
- 23   code  22. Mapa - Manzanas por comuna con zonas de interes
- -- NUEVAS (espacializacion IPM) --
- 24   code  23. Mapa - Variables IPM mas criticas (top 3 en mapa de Cali)
- 25   code  24. Filtrar variables IPM por zona (Barrio Obrero, Roosevelt)
- 26   code  25. Grafico - Comparativa variables IPM por zona (barras top 5)
- -- MODIFICADAS --
- 27   md    ## Analisis comparativo: Zonas de interes (ICS e IPM)
- 28   code  26. Filtrar ICS para cada zona (spatial join)
- 29   code  27. Filtrar IPM para cada zona (spatial join)
- 30   code  28. Estadisticas comparativas ICS, IPM global y vars
- 31   code  29. Graficos comparativos ICS e IPM por zona
- 32   md    ## Relacion ICS vs IPM por zona de interes
- 33   code  30. Relacion ICS vs IPM - scatter por zona (np.polyfit)
+ 15   code  15. Mapas lado a lado
+ 16   code  16. Estadisticas descriptivas (+ carga Excel 15 vars IPM + top 5)
+ 17   code  17. Cargar GeoJSONs auxiliares (comunas, ITT territories)
+ 18   code  18. Unificar CRS y asignar comuna por spatial join
+ 19   code  19. Vista previa con comuna asignada
+ 20   code  20. Estadisticas de ICS, IPM y variables por comuna
+ 21   code  21. Identificar manzanas en todas las zonas ITT (Dinamico)
+ 22   code  22. Mapa - Manzanas por comuna con zonas de interes
+ 23   code  23. Mapa - Variables IPM mas criticas con Filtro de Tramos
+ 24   code  24. Filtrar variables IPM por zona
+ 25   code  25. Grafico - Comparativa de Pobreza Multidimensional (IPM) por Zona
+ -- ACTUALIZADO --
+ 26  code   28. Mapas Detallados por Zona (Zoom Dinamico y Fondo Atenuado)
+            - Clasificacion IPM en 8 rangos fijos con paleta cividis
+            - Etiquetas de valor por manzana
+            - 4 cuadrantes para Cali, zoom dinamico por zona
+ 27   code  29. Tablas de Resumen por Comuna (Orden Ascendente 1-22)
+ 28   code  30. Grafico - Comparativa ICS vs IPM (Con Data Labels)
+ 29   code  31. Validacion final y limpieza
 
 VARIABLES IPM (15 del Excel)
 =============================

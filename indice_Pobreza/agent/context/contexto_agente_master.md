@@ -397,7 +397,7 @@ Segunda mas critica: `bajo_` (Bajo logro educativo >37% promedio).
 
 **Error original (resuelto)**: Las celdas 17-18 originales intentaban merge directo (`cod_mzn` vs `COD_MZN`) sin transformar y daba 0 filas, causando `IndexError: index 0 out of bounds for axis 0 with size 0`. Se reemplazaron por analisis tabular. El merge con transformacion funciona correctamente (ver notebook 01 seccion 20).
 
-## 17. Notebook `01_exploracion_ics_ipm.ipynb` - Estructura actualizada (35 celdas)
+## 17. Notebook `01_exploracion_ics_ipm.ipynb` - Estructura actualizada
 
 | Cell | Tipo | Descripcion |
 | :--- | :--- | :--- |
@@ -429,13 +429,10 @@ Segunda mas critica: `bajo_` (Bajo logro educativo >37% promedio).
 | **25** | code | **Filtrar variables IPM por zona** (Barrio Obrero, Roosevelt) |
 | **26** | code | **Grafico - Comparativa variables IPM por zona** (barras top 5) |
 | **27** | code | **Mapa - Manzanas por zona con ICS e IPM** (color=escala ICS 8 cat, etiqueta=IPM global) |
-| 28 | md | Analisis comparativo: Zonas de interes |
-| 29 | code | Filtrar ICS para cada zona (+ comuna via sjoin) |
-| 30 | code | Filtrar IPM para cada zona (+ comuna via sjoin) |
-| 31 | code | Estadisticas comparativas ICS, IPM global y vars |
-| 32 | code | Graficos comparativos ICS e IPM por zona |
-| 33 | md | Relacion ICS vs IPM |
-| 34 | code | Relacion ICS vs IPM - scatter por zona (np.polyfit) |
+| **28** | code | **Mapas Detallados por Zona (Zoom Dinámico y Fondo Atenuado)** — clasificación IPM en 8 rangos fijos con paleta cividis (accesible daltonismo), etiquetas de valor, 4 cuadrantes para Cali |
+| 29 | code | Tablas de Resumen por Comuna (Orden Ascendente 1-22) |
+| 30 | code | Grafico - Comparativa ICS vs IPM (Con Data Labels) |
+| 31 | code | Validacion final y limpieza |
 
 **Celdas 13-15**: Sin cambios (mapas tematicos originales).
 **Celdas 24-27**: Nuevas - espacializacion de variables IPM.
