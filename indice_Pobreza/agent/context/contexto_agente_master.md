@@ -477,27 +477,7 @@ Se usa filtrado preciso: centroide de cada manzana IPM debe estar DENTRO del buf
 
 ### Configuracion visual
 
-- Paleta: `viridis` discretizado en 8 niveles (accesible daltonismo, mandato de accesibilidad para IPM)
-- Clasificacion: funcion `_clasificar_ipm_master()` con `pd.cut()` en 8 rangos fijos
-- Titulo: `ax.set_title()` con `pad=20`, formato "IPM por manzana: [VARIABLE] - Roosevelt"
-- Leyenda: dentro del mapa a la derecha (efecto atlas: expansion 75% derecha del extent), `loc='center right'`
-- Borde area estudio: color `#D55E00` (naranja Okabe-Ito), linea solida, linewidth=1.5
-- Fondo manzanas: `#F8F8F8` con bordes `#DCDCDC`, linewidth=0.1
-- Etiquetas: texto blanco (valor > 0) o negro (valor = 0), con contorno opuesto
-- Layout: `plt.subplots_adjust(left=0.01, right=0.99, top=0.92, bottom=0.01)`
-
-### Rangos IPM (8 categorias fijas)
-
-| Rango | Categoria |
-| :--- | :--- |
-| 0.4% - 20.0% | Bajo |
-| 20.1% - 27.0% | Moderado-Bajo |
-| 27.1% - 33.1% | Moderado |
-| 33.2% - 39.8% | Moderado-Alto |
-| 39.9% - 48.6% | Alto |
-| 48.7% - 60.6% | Muy Alto |
-| 60.7% - 80.0% | Extremo |
-| 80.1% - 335.1% | Extremo Maximo |
+La configuracion visual de este notebook sigue el **Estandar Maestro de Mapeo** (ver seccion 17.3).
 
 ### Top 5 variables IPM en Roosevelt (por incidencia promedio)
 
@@ -525,7 +505,72 @@ Misma estructura que notebook 04 (Roosevelt), adaptado a Barrio Obrero.
 4. Rezago escolar (REZAGO_): 17.84
 5. Sin aseguramiento (ASEGU_): 12.06
 
-## 17.3. IPM Global comparativo por zona de estudio
+## 17.3. Estandar Maestro de Mapeo (aplica a TODOS los territorios)
+
+Esta configuracion visual es el estandar para generar mapas IPM en cualquier zona de estudio del proyecto. Todos los notebooks de mapeo (04, 05, y futuros) deben seguir esta especificacion.
+
+### Funcion principal
+
+`plot_ipm_variable_master(gdf_zone, gdf_back, gdf_poly, column, title)`
+
+### Capas del mapa (orden de abajo a arriba)
+
+1. **Fondo manzanas catastrales** (`geojson_Manzanas_catastrales.geojson`) — color `#F8F8F8`, bordes `#DCDCDC`, linewidth=0.1, alpha=0.8, zorder=1. Cubre todo el lienzo.
+2. **Poligono area de estudio** — borde `#D55E00` (naranja Okabe-Ito), linea solida, linewidth=1.5, alpha=0.8, zorder=2.
+3. **Manzanas IPM clasificadas** — coloreadas segun categoria (paleta viridis 8 niveles), bordes blancos, linewidth=0.35, alpha=0.9, zorder=3.
+4. **Etiquetas de valor** — contraste inteligente: texto blanco con contorno negro si valor > 0, texto negro con contorno blanco si valor = 0. fontsize=7, zorder=5.
+
+### Paleta de colores
+
+- **IPM:** `viridis` discretizado en 8 niveles (accesible daltonismo)
+- **ICS:** `cividis` discretizado en 8 niveles (accesible daltonismo)
+- Colores generados con: `plt.get_cmap("viridis", 8)` y convertidos a HEX con `mcolors.to_hex()`
+
+### Clasificacion: funcion `_clasificar_ipm_master()`
+
+Usa `pd.cut()` con 8 rangos fijos para asignar categoria y color a cada manzana. Manzanas sin dato reciben color `#BDBDBD` (gris).
+
+### Rangos IPM (8 categorias fijas, iguales para todos los territorios)
+
+| Rango | Categoria |
+| :--- | :--- |
+| 0.4% - 20.0% | Bajo |
+| 20.1% - 27.0% | Moderado-Bajo |
+| 27.1% - 33.1% | Moderado |
+| 33.2% - 39.8% | Moderado-Alto |
+| 39.9% - 48.6% | Alto |
+| 48.7% - 60.6% | Muy Alto |
+| 60.7% - 80.0% | Extremo |
+| 80.1% - 335.1% | Extremo Maximo |
+
+### Ajuste de vista "Efecto Atlas"
+
+El extent se calcula desde `gdf_zone.total_bounds` con:
+- Expansion 15% en izquierda, arriba y abajo
+- Expansion **75% a la derecha** para dejar espacio a la leyenda dentro del mapa
+
+### Leyenda
+
+- Ubicacion: `loc='center right'` (dentro del mapa, en el espacio creado por el efecto atlas)
+- Formato: "Rango % | Categoria" para cada nivel
+- Incluye entrada para "Area de estudio" (borde `#D55E00`)
+- `frameon=True`, `framealpha=0.9`
+
+### Titulo
+
+- Formato: `"IPM por manzana: [VARIABLE EN MAYUSCULAS] - [ZONA]"`
+- `fontsize=16`, `fontweight='bold'`, `pad=20`
+
+### Layout
+
+- `plt.subplots_adjust(left=0.01, right=0.99, top=0.92, bottom=0.01)`
+- Figura: `figsize=(18, 12)`
+
+### Filtrado espacial
+
+Se usa filtrado preciso para cada zona: centroide de cada manzana IPM debe estar DENTRO del poligono del area de estudio (sjoin con `predicate='within'` en EPSG:3115 para precision metrica).
+
+## 17.4. IPM Global comparativo por zona de estudio
 
 **Interpretacion del IPM:** El IPM es un indicador **inverso**. Mas cercano a 0 = mejor (menos pobreza), mas cercano a 100 = peor (mas privaciones). Un hogar se considera en pobreza multidimensional cuando IPM >= 33.3%. Lo mismo aplica para las 15 variables desagregadas: mayor valor = peor situacion.
 
