@@ -298,9 +298,13 @@ Puedes iniciar a otro agente con este texto:
 
 > Este repo calcula el ITT de zonas urbanas de Cali. La metodologia vigente exige `ref_min/ref_max` fijos por indicador y esta documentada en `agent/knowledge_base/Guia_ITT_Metodologia_Notebook.md`. `notebooks/03_itt_barrio_obrero.ipynb` es la referencia operativa principal; `notebooks/01_itt_roosevelt.ipynb` ya esta alineado a esa logica; `notebooks/02_itt_avenida_ciudad_de_cali.ipynb` sigue funcional pero aun usa min-max relativo y debe tratarse como implementacion pendiente de homologacion. Los valores Proxy actuales provenientes de Pulmon de Oriente son `Entorno Urbano = 39.2`, `Educacion y Desarrollo = 54.9` y `Vulnerabilidad = 54.1`, pero en Barrio Obrero `Entorno Urbano` ya puede sobrescribirse con un proxy experimental de `deficit habitacional 2024` para `Comuna 9`. Ese proxy no tiene periodicidad mensual o trimestral observada; su visualizacion adecuada hoy es el `heatmap` de componentes del deficit cualitativo 2024. Distingue siempre entre datos reales, scores provisionales y metodologia vigente. No inventes outputs no versionados ni asumas que el comparativo ya esta completo.
 
-## 14. Escala de clasificacion del ICS (Indice de Condicion Social)
+## 14. Escala de clasificacion del IPM e ICS
 
-El IPM Y ICS se clasifica en 8 categorias con la siguiente escala de colores y rangos numericos (usar coma como separador decimal):
+El IPM y el ICS se clasifican en 8 categorias con los mismos rangos numericos pero paletas diferentes:
+- **IPM:** paleta `viridis` (accesible daltonismo). Indicador inverso (mayor = peor).
+- **ICS:** paleta `cividis` (accesible daltonismo). Indicador directo (mayor = mejor).
+
+Rangos numericos (usar coma como separador decimal):
 
 | HEX | Rango | Categoria |
 | :--- | :--- | :--- |
@@ -473,10 +477,27 @@ Se usa filtrado preciso: centroide de cada manzana IPM debe estar DENTRO del buf
 
 ### Configuracion visual
 
-- Paleta: `cividis` discretizado en 8 niveles (accesible daltonismo)
-- Titulo: centrado con `fig.suptitle()`, separado del borde (`y=0.92`)
-- Leyenda: a la derecha fuera del mapa (`bbox_to_anchor=(1.01, 0.5)`, `loc='center left'`)
-- Layout: `tight_layout(rect=[0, 0, 0.78, 0.90])`
+- Paleta: `viridis` discretizado en 8 niveles (accesible daltonismo, mandato de accesibilidad para IPM)
+- Clasificacion: funcion `_clasificar_ipm_master()` con `pd.cut()` en 8 rangos fijos
+- Titulo: `ax.set_title()` con `pad=20`, formato "IPM por manzana: [VARIABLE] - Roosevelt"
+- Leyenda: dentro del mapa a la derecha (efecto atlas: expansion 75% derecha del extent), `loc='center right'`
+- Borde area estudio: color `#D55E00` (naranja Okabe-Ito), linea solida, linewidth=1.5
+- Fondo manzanas: `#F8F8F8` con bordes `#DCDCDC`, linewidth=0.1
+- Etiquetas: texto blanco (valor > 0) o negro (valor = 0), con contorno opuesto
+- Layout: `plt.subplots_adjust(left=0.01, right=0.99, top=0.92, bottom=0.01)`
+
+### Rangos IPM (8 categorias fijas)
+
+| Rango | Categoria |
+| :--- | :--- |
+| 0.4% - 20.0% | Bajo |
+| 20.1% - 27.0% | Moderado-Bajo |
+| 27.1% - 33.1% | Moderado |
+| 33.2% - 39.8% | Moderado-Alto |
+| 39.9% - 48.6% | Alto |
+| 48.7% - 60.6% | Muy Alto |
+| 60.7% - 80.0% | Extremo |
+| 80.1% - 335.1% | Extremo Maximo |
 
 ### Top 5 variables IPM en Roosevelt (por incidencia promedio)
 
