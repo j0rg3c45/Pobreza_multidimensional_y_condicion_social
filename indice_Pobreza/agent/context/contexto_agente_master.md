@@ -440,32 +440,43 @@ Segunda mas critica: `bajo_` (Bajo logro educativo >37% promedio).
 
 ## 17.1. Notebook `04_mapeo_ipm_roosevelt.ipynb` - Mapeo Geoespacial IPM Roosevelt
 
-6 celdas (1 markdown + 5 code). Fuente: `Mzn_ipm_variables_filtrado_tramos_Roosevelt_Buffer_100.geojson`.
+7 celdas (1 markdown + 6 code). Fuente: `geojson_ipm/Mzn_ipm_variables.geojson` (filtrado espacial a Roosevelt).
 
 ### Estructura
 
 | Cell | Tipo | Descripcion |
 | :--- | :--- | :--- |
-| 0 | md | Introduccion: Analisis Geoespacial IPM - Roosevelt |
-| 1 | code | Instalacion dependencias (Colab) |
-| 2 | code | Importar librerias + clonar/actualizar repo + cargar 3 capas (IPM vars, fondo manzanas ICS, area estudio buffer) + unificar CRS a WGS84 |
-| 3 | code | Identificar 15 variables IPM, seleccionar Top 5 por incidencia promedio |
-| 4 | code | Funcion `plot_ipm_variable()` con escala semantica 8 categorias (cividis accesible daltonismo), fondo manzanas gris, poligono area estudio rojo discontinuo, etiquetas valor, leyenda externa |
+| 0 | md | Introduccion con contexto y cifras (severidad IPM urbana 15.28%, rural 38.33%) |
+| 1 | code | Instalacion dependencias (Colab): geopandas, matplotlib, seaborn, openpyxl |
+| 2 | code | Importar librerias (pandas, geopandas, matplotlib, seaborn, numpy, mcolors, withStroke, mpatches) |
+| 3 | code | Definir rutas con deteccion de entorno (Colab/local) + cargar 3 capas + unificar CRS WGS84 + filtrado espacial preciso (centroide sjoin en EPSG:3115) |
+| 4 | code | Funcion `plot_ipm_variable()` con escala semantica 8 categorias (cividis), fondo manzanas catastrales, poligono area estudio, etiquetas, leyenda a la derecha |
 | 5 | code | Generar 5 mapas prioritarios |
 | 6 | code | Descargar GeoJSON a PC (google.colab.files.download) |
 
+### Rutas de datos actualizadas
+
+- **IPM completo:** `geojson_ipm/Mzn_ipm_variables.geojson`
+- **Fondo manzanas:** `geojson_Manzanas_catastrales/geojson_Manzanas_catastrales.geojson`
+- **Area estudio:** `geojson_poligonos_territorio_ITT/poligono_Roosevelt_Buffer_100.geojson`
+
+### Filtrado espacial
+
+Se usa filtrado preciso: centroide de cada manzana IPM debe estar DENTRO del buffer Roosevelt (sjoin con predicate='within' en EPSG:3115 para precision metrica). Resultado: 40 manzanas.
+
 ### Capas del mapa (orden de abajo a arriba)
 
-1. Fondo manzanas catastrales (`geojson_Manzanas_catastrales.geojson`) — gris claro `#F0F0F0`, bordes `#CCCCCC`, zorder=1
-2. Poligono area estudio (`tramos_Roosevelt_Buffer_100.geojson`) — borde rojo `#E63946`, discontinuo, zorder=2
+1. Fondo manzanas catastrales — gris claro `#F0F0F0`, bordes `#CCCCCC`, zorder=1, toda la hoja
+2. Poligono area estudio — borde rojo `#E63946`, discontinuo, zorder=2
 3. Manzanas IPM con datos — escala cividis 8 niveles, zorder=3
 4. Etiquetas de valor — texto blanco con contorno negro, zorder=4
 
-### Paleta accesible (daltonismo)
+### Configuracion visual
 
-- Colormap: `cividis` discretizado en 8 niveles
-- Categorias: Bajo, Moderado-Bajo, Moderado, Moderado-Alto, Alto, Muy Alto, Extremo, Extremo Maximo
-- Rangos escalados proporcionalmente al `ref_max` de cada indicador
+- Paleta: `cividis` discretizado en 8 niveles (accesible daltonismo)
+- Titulo: centrado con `fig.suptitle()`, separado del borde (`y=0.92`)
+- Leyenda: a la derecha fuera del mapa (`bbox_to_anchor=(1.01, 0.5)`, `loc='center left'`)
+- Layout: `tight_layout(rect=[0, 0, 0.78, 0.90])`
 
 ### Top 5 variables IPM en Roosevelt (por incidencia promedio)
 
@@ -474,10 +485,6 @@ Segunda mas critica: `bajo_` (Bajo logro educativo >37% promedio).
 3. Dependencia economica (DEPEN_)
 4. Bajo logro educativo (BAJO_)
 5. Rezago escolar (REZAGO_)
-
-### Descarga de GeoJSON
-
-En Colab, la celda 6 usa `google.colab.files.download()` para descargar el archivo directamente al PC del usuario.
 
 ## 17.2. Notebook `05_mapeo_ipm_barrio_obrero.ipynb` - Mapeo Geoespacial IPM Barrio Obrero
 
