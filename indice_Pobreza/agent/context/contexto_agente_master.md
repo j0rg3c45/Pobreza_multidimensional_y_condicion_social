@@ -570,6 +570,47 @@ El extent se calcula desde `gdf_zone.total_bounds` con:
 
 Se usa filtrado preciso para cada zona: centroide de cada manzana IPM debe estar DENTRO del poligono del area de estudio (sjoin con `predicate='within'` en EPSG:3115 para precision metrica).
 
+## 17.3b. Notebook `08_mapeo_ipm_ciudad_paraiso.ipynb` - Mapeo Geoespacial IPM + ICS Ciudad Paraíso
+
+12 celdas (3 markdown + 9 code). Replica el Estandar Maestro de Mapeo (notebook 04 Roosevelt) y agrega el cruce + mapa de ICS. Todas las fuentes y salidas en formato GeoJSON.
+
+- **Datos IPM:** `geojson_ipm/Mzn_ipm_variables.geojson` (15 variables + IPM global).
+- **Datos ICS:** `geojosn_ICS/ics_mzn.geojson`.
+- **Fondo:** `geojson_Manzanas_catastrales/geojson_Manzanas_catastrales.geojson`.
+- **Area de estudio:** `geojson_poligonos_territorio_ITT/poligono_ciudad_Paraiso.geojson` (origen: `indice_ciudad_Paraiso/poligono_ciudad_Paraiso.geojson`, CRS ESRI:103599, reproyectado a WGS84 en el notebook).
+
+### Estructura
+
+| Cell | Tipo | Descripcion |
+| :--- | :--- | :--- |
+| 0 | md | Introduccion y contexto |
+| 1 | code | Instalacion dependencias (Colab) |
+| 2 | code | Importar librerias |
+| 3 | code | Rutas + carga + filtrado espacial (centroide within) de manzanas IPM e ICS |
+| 4 | code | Merge IPM + ICS por `COD_MZN` |
+| 5 | code | Escalas maestras IPM (8 rangos) + Top 5 privaciones (barras) |
+| 6 | code | Motor de mapeo maestro `plot_ipm_variable_master()` |
+| 7 | code | Ejecucion de los 5 mapas IPM (top 5) |
+| 8 | code | Mapa ICS (`plot_ics_master()`, paleta cividis) |
+| 9 | code | Exportar GeoJSON filtrados (IPM e ICS) |
+| 10 | code | Descarga Colab (opcional) |
+| 11 | md | Validacion de estandares |
+
+### Merge key
+
+A diferencia de Roosevelt/Barrio Obrero (IPM desde Excel con `cod_mzn` de 24 chars), aqui tanto IPM como ICS ya estan en GeoJSON con `COD_MZN` de 22 chars homologado. El cruce es directo (`on='COD_MZN'`), NO requiere la transformacion 24->22.
+
+### Resultados (corte actual)
+
+- 33 manzanas IPM, 33 ICS (31 con cruce IPM<->ICS).
+- IPM global promedio = 26.52. ICS promedio = 23.07.
+- Top 5 privaciones: Informalidad (89.7%), Bajo logro educativo (59.7%), Hacinamiento critico (22.9%), Sin aseguramiento (21.6%), Dependencia economica (20.9%).
+
+### Outputs (en `.gitignore`, no versionados)
+
+- `outputs/ciudad_paraiso/IPM_ciudad_paraiso.geojson`
+- `outputs/ciudad_paraiso/ICS_ciudad_paraiso.geojson`
+
 ## 17.4. IPM Global comparativo por zona de estudio
 
 **Interpretacion del IPM:** El IPM es un indicador **inverso**. Mas cercano a 0 = mejor (menos pobreza), mas cercano a 100 = peor (mas privaciones). Un hogar se considera en pobreza multidimensional cuando IPM >= 33.3%. Lo mismo aplica para las 15 variables desagregadas: mayor valor = peor situacion.
@@ -579,6 +620,9 @@ Se usa filtrado preciso para cada zona: centroide de cada manzana IPM debe estar
 | Cali (ciudad) | 11,026 | 16.60 | 0.20 | 100.00 |
 | Barrio Obrero | 11 | 13.18 | 2.00 | 25.60 |
 | Roosevelt | 21 | 7.51 | 2.50 | 25.00 |
+| Ciudad Paraiso | 33 | 26.52 | - | - |
+
+> **Ciudad Paraiso** supera el promedio ciudad en IPM global (26.52 vs 16.60) y ICS promedio = 23.07. Es la zona de estudio con mayor privacion multidimensional registrada hasta ahora, con informalidad critica (89.7%) y bajo logro educativo (59.7%).
 
 Ambas zonas de estudio estan por debajo del promedio ciudad (mejor situacion). Roosevelt esta en mejor condicion que Barrio Obrero. Sin embargo, Barrio Obrero supera al promedio ciudad en informalidad (+13 pts), bajo logro educativo (+18 pts) e inasistencia escolar (+4 pts).
 

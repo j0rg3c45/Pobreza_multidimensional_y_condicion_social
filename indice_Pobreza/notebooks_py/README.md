@@ -49,6 +49,9 @@ No necesitas crear un entorno virtual manualmente. `uv run` lo gestiona por ti.
 | `01_exploracion_ics_ipm.ipynb` | Exploración ICS e IPM, mapas temáticos, enriquecimiento por comuna y zona | Shapefiles ICS/IPM, GeoJSONs zonas, Excel IPM |
 | `02_analisis_ipm_variables.ipynb` | Análisis exploratorio de 15 variables IPM (incidencias) | Excel IPM Variables |
 | `03_indice_vulnerabilidad_multidimensional.ipynb` | **IVM** — Índice de Vulnerabilidad Multidimensional por manzana | ICS + IPM + Excel IPM + Comunas + Zonas |
+| `04_mapeo_ipm_roosevelt.ipynb` | Mapeo geoespacial de las 5 variables IPM más críticas (corredor Roosevelt) | GeoJSON IPM + manzanas catastrales + polígono |
+| `05_mapeo_ipm_barrio_obrero.ipynb` | Mapeo geoespacial IPM (Barrio Obrero, 16 manzanas) | GeoJSON IPM + manzanas catastrales + polígono |
+| `08_mapeo_ipm_ciudad_paraiso.ipynb` | Mapeo geoespacial IPM + ICS (Ciudad Paraíso, 33 manzanas). Filtra y cruza IPM↔ICS, exporta GeoJSON | GeoJSON IPM + ICS + manzanas catastrales + polígono |
 
 ## Scripts auxiliares en notebooks/
 

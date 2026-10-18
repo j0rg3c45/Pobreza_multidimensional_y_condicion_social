@@ -65,3 +65,17 @@
 - Marcado: todos los valores Proxy se identifican con doble asterisco (`**`).
 
 > **Nota metodologica:** Los valores correspondientes a los trimestres Q2, Q3 y Q4 del año 2026 fueron estimados mediante valores Proxy calculados a partir de la linea base historica de los años 2023–2025, con el fin de normalizar la informacion y garantizar comparabilidad estadistica y visual en el analisis.
+
+## Ciudad Paraíso (Mapeo IPM + ICS)
+
+- Estado: implementado.
+- Notebook: `notebooks_py/08_mapeo_ipm_ciudad_paraiso.ipynb`
+- Tipo: mapeo geoespacial de IPM (y ICS) por manzana. No es un ITT de 5 dimensiones.
+- Unidad de analisis: poligono unico de la zona de intervencion Ciudad Paraiso.
+- Metodo espacial: filtrado por centroide de manzana DENTRO del poligono (sjoin `predicate='within'` en EPSG:3115 para precision metrica).
+- Poligono fuente: `indice_ciudad_Paraiso/poligono_ciudad_Paraiso.geojson` (CRS ESRI:103599). Copia versionada en `data/geojson_poligonos_territorio_ITT/poligono_ciudad_Paraiso.geojson`. El notebook reproyecta a WGS84.
+- Fuentes de datos (todas GeoJSON): `geojson_ipm/Mzn_ipm_variables.geojson` (15 variables + IPM), `geojosn_ICS/ics_mzn.geojson` (ICS). Se cruzan por `COD_MZN` (22 chars, directo; NO requiere la transformacion 24->22 del Excel porque ambos GeoJSON ya traen el COD_MZN homologado).
+- Resultados (corte actual): 33 manzanas IPM, 33 ICS (31 con cruce IPM<->ICS). IPM global promedio = 26.52. ICS promedio = 23.07.
+- Top 5 privaciones IPM: Informalidad (89.7%), Bajo logro educativo (59.7%), Hacinamiento critico (22.9%), Sin aseguramiento (21.6%), Dependencia economica (20.9%).
+- Visualizacion: Estandar Maestro de Mapeo (viridis 8 cat para IPM, cividis 8 cat para ICS, efecto atlas, etiquetas con contraste, leyenda integrada).
+- Outputs (en `.gitignore`, no versionados): `outputs/ciudad_paraiso/IPM_ciudad_paraiso.geojson`, `outputs/ciudad_paraiso/ICS_ciudad_paraiso.geojson`.
