@@ -101,6 +101,43 @@ COD_MZN, CLASE, ZONA, cod_dane_a, ics, geometry
 
 ---
 
+## 2b. ¿Cómo se interpreta el valor del IPM?
+
+La escala del IPM funciona igual que una **tasa de reprobados en un salón de clases**: va de **0% a 100%** (o de 0,0 a 1,0) y representa el **porcentaje de personas que viven en hogares pobres multidimensionales** dentro de la zona.
+
+- **0%:** en esa zona nadie es pobre multidimensional (cero carencias críticas acumuladas).
+- **100%:** en esa zona todos son pobres multidimensionales.
+
+Ejemplos con los datos del proyecto:
+
+- **12,59% (Cali urbano):** de cada 100 personas de la zona urbana de Cali, ~13 viven en hogares que acumulan 33% o más de privaciones básicas.
+- **26,52% (Ciudad Paraíso):** de cada 100 personas, casi 27 viven en hogares con privaciones críticas acumuladas (más del doble que el promedio de la ciudad).
+- **7,51% (Roosevelt):** de cada 100 personas, solo ~7 u 8 están en esa condición.
+
+### El "truco" de las dos etapas (no confundir los dos porcentajes)
+
+La confusión habitual ocurre porque hay **dos porcentajes distintos**:
+
+1. **El 33% — el examen del hogar.** Es la regla fija para decidir si un hogar es pobre o no. A cada hogar se le suman sus carencias (pisos de tierra, no cotizar a pensión, niños sin estudiar, etc.). Si suma **33% o más**, ese hogar "reprobó" y se cataloga como pobre.
+2. **El IPM final — el reporte de la zona.** Es el **porcentaje de gente de la zona** que vive en esos hogares que "reprobaron".
+
+En resumen: el IPM de la tabla (7,51%, 13,18%, 26,52%, etc.) es el porcentaje de habitantes en situación de pobreza multidimensional en cada polígono. Entre más alto el número, más pobre y vulnerable es la zona.
+
+### Escala de referencia estándar para Colombia (área urbana)
+
+Aunque técnicamente el IPM puede llegar a 100%, en las ciudades colombianas los valores urbanos se suelen clasificar así:
+
+| Rango de IPM (%) | Nivel de pobreza multidimensional | Qué significa en la práctica | Ejemplo en el estudio |
+| :--- | :--- | :--- | :--- |
+| 0,0% – 8,0% | Muy Bajo / Bajo | Zonas consolidadas (estratos 4, 5 y 6). Cobertura casi total de servicios, empleo formal y buen nivel educativo. | Roosevelt (7,51%) |
+| 8,1% – 15,0% | Medio / Típico urbano | Promedio de una ciudad capital. Servicios básicos y vivienda aceptable, pero pesa la informalidad laboral o adultos sin bachillerato. | Cali urbano (12,59%); Barrio Obrero (13,18%) |
+| 15,1% – 25,0% | Alto | Sectores populares vulnerables. Alta deserción escolar, hacinamiento frecuente, empleo informal generalizado. | Comunas periféricas de ladera u oriente |
+| > 25,0% | Crítico / Severo | Zonas deprimidas, inquilinatos precarios o asentamientos informales. Se acumulan fallas de vivienda, saneamiento, educación e ingresos. | Ciudad Paraíso (26,52%) |
+
+> **Nota:** esta escala de referencia estándar (4 niveles) es para **interpretación socioeconómica** del promedio de una zona. Es distinta de la escala técnica de **8 categorías** que usan los mapas del proyecto (sección 3), que sirve para colorear cada manzana individualmente.
+
+---
+
 ## 3. Escala de clasificación (8 categorías)
 
 El IPM y el ICS comparten los **mismos rangos numéricos** pero usan **paletas distintas** (ambas accesibles para daltonismo):
@@ -119,7 +156,7 @@ El IPM y el ICS comparten los **mismos rangos numéricos** pero usan **paletas d
 | `#8e8978` | 39,9 - 48,6 | Alto |
 | `#b1a570` | 48,7 - 60,6 | Muy Alto |
 | `#d9c55c` | 60,7 - 80,0 | Extremo |
-| `#fee838` | 80,1 - 335,1 | Extremo Máximo |
+| `#fee838` | 80,1 - 100,0 | Extremo Máximo |
 
 ### Formato JSON (para código)
 
@@ -134,7 +171,7 @@ El IPM y el ICS comparten los **mismos rangos numéricos** pero usan **paletas d
     {"rango_min": 39.9, "rango_max": 48.6,  "hex": "#8e8978", "categoria": "Alto"},
     {"rango_min": 48.7, "rango_max": 60.6,  "hex": "#b1a570", "categoria": "Muy Alto"},
     {"rango_min": 60.7, "rango_max": 80.0,  "hex": "#d9c55c", "categoria": "Extremo"},
-    {"rango_min": 80.1, "rango_max": 335.1, "hex": "#fee838", "categoria": "Extremo Maximo"}
+    {"rango_min": 80.1, "rango_max": 100.0, "hex": "#fee838", "categoria": "Extremo Maximo"}
   ]
 }
 ```
@@ -143,12 +180,12 @@ El IPM y el ICS comparten los **mismos rangos numéricos** pero usan **paletas d
 
 ## 4. IPM Global comparativo por zona de estudio
 
-| Zona | Manzanas con IPM | IPM Promedio | IPM Min | IPM Max |
-| :--- | :--- | :--- | :--- | :--- |
-| Cali (ciudad) | 11.026 | 16,60 | 0,20 | 100,00 |
-| Barrio Obrero | 11 | 13,18 | 2,00 | 25,60 |
-| Roosevelt | 21 | 7,51 | 2,50 | 25,00 |
-| Ciudad Paraíso | 33 | 26,52 | - | - |
+| Zona | Manzanas con IPM | IPM Promedio |
+| :--- | :--- | :--- |
+| Cali (urbano) | 12.787 | 12,59 |
+| Barrio Obrero | 11 | 13,18 |
+| Roosevelt | 21 | 7,51 |
+| Ciudad Paraíso | 33 | 26,52 |
 
 Severidad IPM (`IPM > 0`) por zona: Cali Urbana = 15,28 · Cali Rural = 38,33 · Barrio Obrero = 13,18 · Roosevelt = 7,51.
 

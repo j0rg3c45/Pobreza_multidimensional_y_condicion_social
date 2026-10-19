@@ -315,7 +315,7 @@ Rangos numericos (usar coma como separador decimal):
 | `#8e8978` | 39,9 - 48,6 | Alto |
 | `#b1a570` | 48,7 - 60,6 | Muy Alto |
 | `#d9c55c` | 60,7 - 80,0 | Extremo |
-| `#fee838` | 80,1 - 335,1 | Extremo Maximo |
+| `#fee838` | 80,1 - 100,0 | Extremo Maximo |
 
 Formato JSON para codigo:
 
@@ -330,7 +330,7 @@ Formato JSON para codigo:
     {"rango_min": 39.9, "rango_max": 48.6, "hex": "#8e8978", "categoria": "Alto"},
     {"rango_min": 48.7, "rango_max": 60.6, "hex": "#b1a570", "categoria": "Muy Alto"},
     {"rango_min": 60.7, "rango_max": 80.0, "hex": "#d9c55c", "categoria": "Extremo"},
-    {"rango_min": 80.1, "rango_max": 335.1, "hex": "#fee838", "categoria": "Extremo Maximo"}
+    {"rango_min": 80.1, "rango_max": 100.0, "hex": "#fee838", "categoria": "Extremo Maximo"}
   ]
 }
 ```
@@ -541,7 +541,7 @@ Usa `pd.cut()` con 8 rangos fijos para asignar categoria y color a cada manzana.
 | 39.9% - 48.6% | Alto |
 | 48.7% - 60.6% | Muy Alto |
 | 60.7% - 80.0% | Extremo |
-| 80.1% - 335.1% | Extremo Maximo |
+| 80.1% - 100.0% | Extremo Maximo |
 
 ### Ajuste de vista "Efecto Atlas"
 
@@ -615,12 +615,12 @@ A diferencia de Roosevelt/Barrio Obrero (IPM desde Excel con `cod_mzn` de 24 cha
 
 **Interpretacion del IPM:** El IPM es un indicador **inverso**. Mas cercano a 0 = mejor (menos pobreza), mas cercano a 100 = peor (mas privaciones). Un hogar se considera en pobreza multidimensional cuando IPM >= 33.3%. Lo mismo aplica para las 15 variables desagregadas: mayor valor = peor situacion.
 
-| Zona | Manzanas con IPM | IPM Promedio | IPM Min | IPM Max |
-| :--- | :--- | :--- | :--- | :--- |
-| Cali (ciudad) | 11,026 | 16.60 | 0.20 | 100.00 |
-| Barrio Obrero | 11 | 13.18 | 2.00 | 25.60 |
-| Roosevelt | 21 | 7.51 | 2.50 | 25.00 |
-| Ciudad Paraiso | 33 | 26.52 | - | - |
+| Zona | Manzanas con IPM | IPM Promedio |
+| :--- | :--- | :--- |
+| Cali (urbano) | 12,787 | 12.59 |
+| Barrio Obrero | 11 | 13.18 |
+| Roosevelt | 21 | 7.51 |
+| Ciudad Paraiso | 33 | 26.52 |
 
 > **Ciudad Paraiso** supera el promedio ciudad en IPM global (26.52 vs 16.60) y ICS promedio = 23.07. Es la zona de estudio con mayor privacion multidimensional registrada hasta ahora, con informalidad critica (89.7%) y bajo logro educativo (59.7%).
 
